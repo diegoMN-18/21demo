@@ -1,0 +1,3258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gilmore Girls - Netflix</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Roboto:wght@300;400;500;700&amp;display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #141414;
+        color: #fff;
+        overflow-x: hidden;
+    }
+    
+    /* Netflix Header */
+    .netflix-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 15px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
+        z-index: 1000;
+    }
+    
+    .netflix-logo {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 2rem;
+        color: #E50914;
+        letter-spacing: 3px;
+        font-weight: bold;
+    }
+    
+    .netflix-nav {
+        display: flex;
+        gap: 25px;
+    }
+    
+    .netflix-nav a {
+        color: #e5e5e5;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s;
+    }
+    
+    .netflix-nav a:hover {
+        color: #b3b3b3;
+    }
+    
+    /* Hero Banner - Netflix Style Show Cover */
+    .hero-banner {
+        position: relative;
+        height: 85vh;
+        min-height: 600px;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(to right, rgba(20,20,20,1) 0%, rgba(20,20,20,0.7) 30%, rgba(20,20,20,0.3) 60%, transparent 100%);
+    }
+    
+    .hero-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 20%;
+    }
+    
+    .hero-gradient-left {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(20,20,20,1) 0%, rgba(20,20,20,0.8) 40%, transparent 100%);
+    }
+    
+    .hero-gradient-bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 200px;
+        background: linear-gradient(to top, #141414 0%, transparent 100%);
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 10;
+        padding: 0 50px;
+        max-width: 600px;
+    }
+    
+    /* Netflix Style Title Card */
+    .show-logo {
+        margin-bottom: 20px;
+    }
+    
+    .show-title {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 5rem;
+        letter-spacing: 8px;
+        background: linear-gradient(135deg, #8B2942 0%, #D4A03A 50%, #2D5A3D 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: none;
+        filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+    }
+    
+    .show-meta {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        font-size: 0.85rem;
+        color: #b3b3b3;
+    }
+    
+    .show-meta span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .netflix-badge {
+        background: #E50914;
+        color: white;
+        padding: 2px 8px;
+        font-size: 0.7rem;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    
+    .hd-badge {
+        border: 1px solid #b3b3b3;
+        padding: 1px 6px;
+        font-size: 0.7rem;
+        font-weight: bold;
+    }
+    
+    .show-description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #fff;
+        margin-bottom: 25px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    
+    /* Birthday Message Box */
+    .birthday-message {
+        background: rgba(139, 41, 66, 0.9);
+        border-left: 4px solid #D4A03A;
+        padding: 20px 25px;
+        margin-bottom: 25px;
+        border-radius: 0 8px 8px 0;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes glow {
+        from {
+            box-shadow: 0 0 10px rgba(212, 160, 58, 0.3);
+        }
+        to {
+            box-shadow: 0 0 20px rgba(212, 160, 58, 0.6);
+        }
+    }
+    
+    .birthday-message p {
+        font-size: 1.3rem;
+        font-style: italic;
+        color: #fff;
+        line-height: 1.6;
+    }
+    
+    .birthday-message .signature {
+        font-size: 0.9rem;
+        color: #D4A03A;
+        margin-top: 10px;
+        text-align: right;
+        font-style: normal;
+    }
+    
+    /* Netflix Buttons */
+    .button-row {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+    }
+    
+    .netflix-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-play {
+        background: #fff;
+        color: #000;
+    }
+    
+    .btn-play:hover {
+        background: rgba(255,255,255,0.8);
+    }
+    
+    .btn-info {
+        background: rgba(109, 109, 110, 0.7);
+        color: #fff;
+    }
+    
+    .btn-info:hover {
+        background: rgba(109, 109, 110, 0.5);
+    }
+    
+    .btn-icon {
+        font-size: 1.3rem;
+    }
+    
+    /* Playing indicator */
+    .playing-indicator {
+        display: none;
+        align-items: center;
+        gap: 8px;
+        color: #D4A03A;
+        font-size: 0.9rem;
+        margin-top: 15px;
+        animation: pulse 1.5s infinite;
+    }
+    
+    .playing-indicator.show {
+        display: flex;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+    
+    /* More Info Section */
+    .more-info {
+        background: #141414;
+        padding: 30px 50px;
+    }
+    
+    .info-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 50px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .about-section h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #fff;
+    }
+    
+    .about-section p {
+        color: #b3b3b3;
+        line-height: 1.8;
+        font-size: 0.95rem;
+    }
+    
+    .details-section {
+        color: #b3b3b3;
+    }
+    
+    .details-section p {
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+    }
+    
+    .details-section strong {
+        color: #fff;
+    }
+    
+    /* Episodes Section */
+    .episodes-section {
+        padding: 30px 50px;
+        background: #141414;
+    }
+    
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        color: #fff;
+    }
+    
+    .season-dropdown {
+        background: rgba(0,0,0,0.5);
+        border: 1px solid #333;
+        color: #fff;
+        padding: 8px 20px;
+        font-size: 0.9rem;
+        cursor: pointer;
+    }
+    
+    .episodes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 15px;
+    }
+    
+    .episode-card {
+        background: #181818;
+        border-radius: 4px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+    
+    .episode-card:hover {
+        transform: scale(1.02);
+    }
+    
+    .episode-thumb {
+        position: relative;
+        height: 160px;
+        overflow: hidden;
+    }
+    
+    .episode-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .episode-number {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(0,0,0,0.7);
+        padding: 4px 10px;
+        font-size: 0.75rem;
+    }
+    
+    .episode-runtime {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: rgba(0,0,0,0.7);
+        padding: 4px 8px;
+        font-size: 0.7rem;
+    }
+    
+    .episode-info {
+        padding: 15px;
+    }
+    
+    .episode-title {
+        font-size: 1rem;
+        color: #fff;
+        margin-bottom: 8px;
+    }
+    
+    .episode-desc {
+        font-size: 0.8rem;
+        color: #b3b3b3;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    /* Similar Shows Section */
+    .similar-section {
+        padding: 30px 50px 50px;
+        background: #141414;
+    }
+    
+    .shows-row {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 20px;
+    }
+    
+    .show-card {
+        min-width: 200px;
+        height: 280px;
+        background: linear-gradient(135deg, #6B4423, #1E3A5F);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .show-card:hover {
+        transform: scale(1.05);
+    }
+    
+    /* Footer */
+    .netflix-footer {
+        background: #141414;
+        padding: 40px 50px;
+        text-align: center;
+        color: #808080;
+        font-size: 0.8rem;
+        border-top: 1px solid #333;
+    }
+    
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .footer-links a {
+        color: #808080;
+        text-decoration: none;
+    }
+    
+    .footer-links a:hover {
+        color: #b3b3b3;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .netflix-header {
+            padding: 15px 20px;
+        }
+    
+        .netflix-nav {
+            display: none;
+        }
+    
+        .hero-banner {
+            height: 70vh;
+        }
+    
+        .hero-content {
+            padding: 0 20px;
+        }
+    
+        .show-title {
+            font-size: 3rem;
+        }
+    
+        .birthday-message p {
+            font-size: 1rem;
+        }
+    
+        .info-grid {
+            grid-template-columns: 1fr;
+        }
+    
+        .more-info, .episodes-section, .similar-section {
+            padding: 20px;
+        }
+    }
+  </style>
+  <script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  <style>
+    /* stylelint-disable */
+    /* stylelint-enable */
+    /** Buttons
+    ---------------------------------------------------------*/
+    :root {
+      --transparent: rgba(255, 255, 255, 0);
+      --white: hsl(0, 0%, 100%);
+      --th-white: hsl(0, 0%, 100%);
+      --black: hsl(0, 0%, 0%);
+      --th-black: hsl(0, 0%, 0%);
+      --lightGrey: hsl(0, 0%, 94%);
+      --th-grey-white: hsl(210, 10%, 97%);
+      --th-grey-light: hsl(210, 10%, 94.8%);
+      --th-grey-medium: hsl(212, 10%, 94%);
+      --th-grey: hsl(216, 22%, 91%);
+      --th-grey-dark: hsl(221, 20%, 78%);
+      --th-slate: hsl(221, 20%, 33%);
+      --th-slate-light: hsl(222, 20%, 45%);
+      --th-slate-dark: hsl(222, 22%, 18%);
+      --th-slate-alt: #333F57;
+      --th-slate-hover:#3E4A62;
+      --th-slate-dark-hover800:hsl(220, 22%, 24%);
+      --th-slate-dark-active800:hsl(219, 24%, 26%);
+      --th-slate-dark-hover600:hsl(222, 22%, 21%);
+      --th-slate-dark-active600:hsl(221, 24%, 23%);
+      --th-cool-grey-600: hsl(203, 16%, 44%);
+      --th-cool-grey-700: hsl(204, 18%, 30%);
+      --th-cool-grey-750: hsl(203, 18%, 32%);
+      --th-cool-grey-800: hsl(209, 20%, 25%);
+      --th-cool-grey-850: hsl(209, 20%, 21%);
+      --th-cool-grey-900: hsl(210, 24%, 16%);
+      --fontColorDark: var( --th-slate-dark);
+      --fontColorWhite: hsl(0, 0%, 100%);
+      --list-item-hover:hsl(225, 20%, 96%);
+      --list-item-light-hover: hsl(210, 20%, 98%);
+      --list-item-hover-dark:hsla(222, 22%, 18%, 0.50);
+      --list-item-light-hover-dark: hsla(222, 20%, 33%, 0.50);
+      --greyTransparent: hsla(222, 22%, 18%, 0.12);
+      --whiteTransparent: hsla(0, 0%, 100%, 0.12);
+      --defaultColor: hsl(220, 20%, 91%);
+      --defaultColorHover: hsl(220, 19%, 78%);
+      --defaultColorActive: hsl(220, 19%, 68%);
+      --defaultColorSelected: hsl(221, 20%, 75%);
+      --buttonBorderColor: 2px solid hsl(220, 20%, 91%);
+      --buttonBorderColorHover: 2px solid hsl(220, 19%, 78%);
+      --buttonBorderColorActive: 2px solid hsl(220, 19%, 68%);
+      --buttonBorderColorSelected: 2px solid hsl(221, 20%, 75%);
+      --iconFillColor: var( --th-slate-dark );
+      --primaryColor: hsl(211, 100%, 45%);
+      --primaryColorHover: hsl(211, 100%, 35%);
+      --primaryColorActive: hsl(211, 100%, 25%);
+      --primaryButtonBorder: 2px solid hsl(211, 100%, 45%);
+      --primaryButtonBorderHover: 2px solid hsl(211, 100%, 35%);
+      --primaryButtonBorderActive: 2px solid hsl(211, 100%, 25%);
+      --secondaryColor: var(--th-slate);
+      --secondaryColorHover: hsl(221, 20%, 23%);
+      --secondaryColorActive: hsl(221, 20%, 13%);
+      --secondaryButtonBorderColor: 2px solid var(--th-slate);
+      --secondaryButtonBorderColorHover: 2px solid hsl(221, 20%, 23%);
+      --secondaryButtonBorderColorActive: 2px solid hsl(221, 20%, 13%);
+      --disabledColor: hsl(0, 0%, 50%);
+      --disabledBackgroundColor: hsl(0, 0%, 95%);
+      --brandColorGreen: hsl(76, 60%, 52%);
+      --brandColorGreenActive: hsl(76, 62%, 40%);
+      --primaryColorGreen: hsl(79, 100%, 24%);
+      --primaryColorGreenHover: hsl(79, 100%, 14%);
+      --primaryColorGreenActive: hsl(79, 100%, 4%);
+      --buttonBorderGreen: 2px solid hsl(79, 100%, 24%);
+      --buttonBorderGreenHover: 2px solid hsl(79, 100%, 14%);
+      --buttonBorderGreenActive: 2px solid hsl(79, 100%, 4%);
+      --brandColorPink: hsl(344, 98%, 59%);
+      --primaryColorPink: #e12362;
+      --primaryColorPinkHover: hsl(340, 76%, 41%);
+      --primaryColorPinkActive: hsl(340, 76%, 31%);
+      --buttonBorderPink: 2px solid hsl(340, 76%, 51%);
+      --buttonBorderPinkHover: 2px solid hsl(340, 76%, 41%);
+      --buttonBorderPinkActive: 2px solid hsl(340, 76%, 31%);
+      --brandColorTeal: hsl(180, 85%, 34%);
+      --primaryColorTeal: hsl(184, 50%, 35%);
+      --primaryColorTealHover: hsl(184, 50%, 25%);
+      --primaryColorTealActive: hsl(184, 50%, 15%);
+      --buttonBorderTeal: 2px solid hsl(184, 50%, 35%);
+      --buttonBorderTealHover: 2px solid hsl(184, 50%, 25%);
+      --buttonBorderTealActive: 2px solid hsl(184, 50%, 15%);
+      --brandColorPurple: hsl(264, 100%, 68%);
+      --primaryColorPurple: hsl(264, 83%, 62%);
+      --primaryColorPurpleHover: hsl(264, 83%, 52%);
+      --primaryColorPurpleActive: hsl(264, 83%, 42%);
+      --buttonBorderPurple: 2px solid hsl(264, 83%, 62%);
+      --buttonBorderPurpleHover: 2px solid hsl(264, 83%, 52%);
+      --buttonBorderPurpleActive: 2px solid hsl(264, 83%, 42%);
+      --brandColorOrange: hsl(33, 94%, 48%);
+      --primaryColorOrange: hsl(15, 79%, 45%);
+      --primaryColorOrangeHover: hsl(15, 80%, 35%);
+      --primaryColorOrangeActive: hsl(15, 80%, 25%);
+      --buttonBorderOrange: 2px solid hsl(15, 79%, 45%);
+      --buttonBorderOrangeHover: 2px solid hsl(15, 80%, 35%);
+      --buttonBorderOrangeActive: 2px solid hsl(15, 80%, 25%);
+      --brandColorBlue: hsl(197, 100%, 50%);
+      --brandColorBlueActive: hsl(197, 100%, 39%);
+      --brandColorBlueWCAG: hsl(197, 100%, 42%);
+      --primaryColorBlue: hsl(201, 100%, 37%);
+      --primaryColorBlueHover: hsl(201, 100%, 27%);
+      --primaryColorBlueActive: hsl(201, 100%, 17%);
+      --buttonBorderBlue: 2px solid hsl(201, 100%, 37%);
+      --buttonBorderBlueHover: 2px solid hsl(201, 100%, 27%);
+      --buttonBorderBlueActive: 2px solid hsl(201, 100%, 17%);
+      --BrandcolorYellow: hsl(41, 90%, 61%);
+      --primaryColorReachDeck: hsl(209, 100%, 39%);
+      --primaryColorReachDeckHover: hsl(209, 100%, 29%);
+      --primaryColorReachDeckActive: hsl(209, 100%, 19%);
+      --buttonBorderReachDeck: 2px solid hsl(209, 100%, 39%);
+      --buttonBorderReachDeckHover: 2px solid hsl(209, 100%, 29%);
+      --buttonBorderReachDeckActive: 2px solid hsl(209, 100%, 19%);
+      --reachDeckEditorColor: hsl(112, 100%, 26%);
+      --launchpadButtonLight: hsl(210, 10%, 96%);
+      --launchpadButtonLightHover: hsl(220, 8%, 92%);
+      --launchpadButtonLightActive:hsl(0, 0%, 90%);
+      --ContrastPinkOrbitNoteHover: hsl(343, 81%, 48%);
+      --ContrastPinkOrbitNoteActive: hsl(345, 96%, 42%);
+      --ContrastButtonBorderPink: hsl(345, 96%, 42%);
+      --primaryColorClaroNavy: hsl(207, 74%, 27%);
+      --primaryColorClaroNavyHover: hsl(206, 83%, 21%);
+      --primaryColorClaroNavyActive: hsl(206, 89%, 17%);
+      --buttonBorderClaro: 2px solid hsl(207, 74%, 27%);
+      --buttonBorderClaroHover: 2px solid hsl(206, 83%, 21%);
+      --buttonBorderClaroActive: 2px solid hsl(206, 89%, 17%);
+      --primaryColorClaroBlue: hsl(201, 100%, 37%);
+      --primaryColorClaroBlueHover: hsl(201, 100%, 31%);
+      --primaryColorClaroBlueActive: hsl(201, 100%, 27%);
+      --claroDark: hsl(218, 54%, 20%);
+      --claroGrey: hsl(217, 31%, 68%);
+      --claroBlue: hsl(191, 88%, 40%);
+      --claroBlueAlt: hsl(188, 78%, 50%);
+      --claroGreen: hsl(75, 63%, 51%);
+      --altColor: var(--claroGreen);
+      --altColorHover: hsl(75, 70%, 40%);
+      --altColorActive: hsl(75, 77%, 33%);
+      --altButtonBorderColor: 2px solid var(--claroGreen);
+      --altButtonBorderColorHover: 2px solid hsl(75, 70%, 40%);
+      --altButtonBorderColorActive: 2px solid hsl(75, 77%, 33%);
+      --brandColorLingdys: hsl(0, 82%, 49%);
+      --primaryColorLingdys: hsl(217, 34%, 38%);
+      --primaryColorLingdysHover: hsl(217, 37%, 24%);
+      --primaryColorLingdysActive: hsl(217, 39%, 18%);
+      --buttonBorderLingdys: 2px solid hsl(217, 34%, 38%);
+      --buttonBorderLingdysHover: 2px solid hsl(217, 37%, 24%);
+      --buttonBorderLingdysActive: 2px solid hsl(217, 39%, 18%);
+      --brandColorAppWriter: #F70790;
+      --primaryColorAppWriter: #D8087F;
+      --primaryColorAppWriterHover:#B40669;
+      --primaryColorAppWriterActive: #9F055C;
+      --buttonBorderAppwriter: 2px solid #D8087F;
+      --buttonBorderAppwriterHover: 2px solid #B40669;
+      --buttonBorderAppWriterActive: 2px solid #9F055C;
+      --iconToggleFillOrbitNote: hsl(196, 99%, 50%);
+      --textColor: var( --th-slate-dark );
+      --textColorLight: var( --th-white );
+      --border: 1px solid var( --th-grey );
+      --borderDark: 1px solid var( --th-grey-dark );
+      --infoColor: hsl(194, 77%, 24%);
+      --successColor: hsla(134, 71%, 43%, 0.584);
+      --errorColor: hsl(0, 71%, 51%);
+      --warningColor: hsl(45, 97%, 51%);
+      --infoBackgroundColor: hsl(180, 100%, 99%);
+      --successBackgroundColor: hsl(78, 100%, 98%);
+      --errorBackgroundColor: hsl(0, 100%, 98%);
+      --warningBackgroundColor: hsl(35, 100%, 98%);
+      --notificationDarkModeBackground: hsl(218, 22%, 37%);
+      --infoBorderColor: hsl(191, 44%, 82%);
+      --successBorderColor: hsl(100, 28%, 69%);
+      --errorBorderColor: hsl(0, 37%, 73%);
+      --warningBorderColor: hsl(41, 30%, 71%);
+      --notificationDarkModeBorder: hsl(217, 19%, 41%);
+      --infoTitleColor: hsl(194, 77%, 24%);
+      --successTitleColor: hsl(121, 48%, 23%);
+      --errorTitleColor: hsl(1, 47%, 40%);
+      --warningTitleColor: hsl(37, 92%, 25%);
+      --infoWarningColor: hsl(194, 77%, 24%);
+      --successWarningColor: hsla(121, 48%, 23%, 0.8);
+      --errorWarningColor: hsla(1, 47%, 40%, 0.8);
+      --warningWarningColor: hsla(37, 92%, 25%, 0.8);
+      --line-height-base: 1.5;
+      --zindex-modal: 1050;
+      --modal-dialog-margin: 2rem;
+      --modal-content-border-radius: 1px;
+      --buttonBorderRadius: 30px;
+      --buttonRoundness: 30px;
+      --buttonLinkTextColor: var( --primaryColor)!important;
+      --buttonLinkIconColor: var( --primaryColor)!important;
+      --buttonNoBackgroundTextColor: var( --th-slate-dark);
+      --buttonNoBackgroundIconColor: var( --th-slate-dark);
+      --buttonNoBackgroundColor: transparent;
+      --buttonNoBackgroundColorHover: var(--icon-button-background-hover-color);
+      --buttonNoBackgroundColorActive: var(--icon-button-background-active-color);
+      --buttonNoBackgroundBorder: 2px solid transparent;
+      --buttonNoBackgroundBorderHover: 2px solid transparent;
+      --buttonNoBackgroundBorderActive: 2px solid transparent;
+      --activeDotColor: inherit;
+      --themeColorDefault: var(--defaultColor);
+      --themeColorGroundworks: var(--primaryColor);
+      --themeColorReadWrite: var(--primaryColorPurple);
+      --themeColorEquatio: var(--primaryColorBlue);
+      --themeColorBrowsealoud: var(--primaryColorOrange);
+      --themeColorWriq: var(--primaryColorTeal);
+      --themeColorFluencyTutor: var(--primaryColorGreen);
+      --themeColorSnapVerter: var(--primaryColorGreen);
+      --themeColorSpeechStream: var(--primaryColorPink);
+      --themeColorTexthelp: var(--primaryColorTeal);
+      --themeColorReachDeck: var(--primaryColorReachDeck);
+      --themeColorPdfReader: var(--primaryColorBlue);
+      --uniloginBackgroundColor: #F7F7F7;
+      --uniloginWindowBackgroundColor: var(--primaryColorBlue);
+      --line-height-base: 1.5;
+      --zindex-modal: 1050;
+      --modal-dialog-margin: 2em;
+      --modal-content-border-radius: 1px;
+      --modal-inner-padding: 1.5em;
+      --modal-title-padding: 1.5em;
+      --modal-title-line-height: var(--line-height-base);
+      --modal-content-bg: #fff;
+      --modal-content-border-color: rgba(0, 0, 0, .2);
+      --modal-content-fallback-border-color: #999;
+      --modal-backdrop-bg: #000;
+      --modal-backdrop-opacity: .5;
+      --modal-header-border-color: #e5e5e5;
+      --modal-footer-border-color: var(--modal-header-border-color);
+      --modal-header-background-color: #f5f5f5;
+      --select-border: 1px solid #DADADA;
+      --select-background: hsl(0, 0%, 100%);
+      --select-background-color: #efefef;
+      --select-background-color-hover: hsl(0, 0%, 97%);
+      --input-border: 1px solid #DADADA;
+      --input-background-color: #ffffff;
+      --settings-title-color: var(--primaryColor);
+      --settings-item-background-color: var(--th-white);
+      --settings-item-background-hover-color: var(--th-grey-medium);
+      --settings-item-background-active-color: var(--th-grey);
+      --list-group-background-color: transparent;
+      --list-group-item-background-color: var(--th-white);
+      --list-group-item-background-hover-color: var(--th-grey-light);
+      --list-group-item-background-active-color: var(--th-grey);
+      --list-group-item-icon-color: var(--th-slate-dark);
+      --ListGroupSearchItemColor: var(--th-white);
+      --ListGroupSearchItemColorHover: #f9fafb;
+      --ListGroupSearchItemTextColor: var(--th-slate);
+      --ListGroupSearchItemBorderColor: hsla(0, 0%, 0%, 0.15);
+      --ListGroupSearchItemAsideColor: hsl(0, 0%, 95%);
+      --ListGroupSearchItemAsideTextColor: #000;
+      --toolbar-button-disabled: hsl(0, 0%, 96.1%);
+      --toolbar-button-background: hsl(0, 0%, 96.1%);
+      --toolbar-button-hover-background: hsl(0, 0%, 80%);
+      --toolbar-button-color: hsl(0, 0%, 0%);
+      --toolbar-button-hover-active-background: hsl(0, 0%, 70.2%);
+      --toolbar-button-default-size: 43px;
+      --toolbar-button-focus-color: hsl(213, 71.3%, 60.4%);
+      --toolbar-button-svg-color: hsl(0, 0%, 29%);
+      --toolbar-button-toggle-color: hsl(264, 100%, 68%);
+      --panel-inner-padding: .7em;
+      --icon-button-background-default-color: hsla(0, 0%, 0%, 0.077);
+      --icon-button-background-hover-color: hsla(0, 0%, 0%, 0.125);
+      --icon-button-background-active-color: hsla(0, 0%, 0%, 0.187);
+      --icon-button-background-default-color-dark: rgba(255, 255, 255, 0.077);
+      --icon-button-background-hover-color-dark: rgba(255, 255, 255, 0.146);
+      --icon-button-background-active-color-dark: rgba(255, 255, 255, 0.221);
+      --icon-button-border-color: solid 2px transparent;
+      --menuIconFillColor: var(--th-slate);
+      --cardIconFillColor: var(--th-slate);
+      --default-menu-notify-background-colour: hsl(264, 100%, 68%);
+      --toolbarButtonBackgroundColor: var( --defaultColor);
+      --toolbarButtonBackgroundHoverColor: var( --icon-button-background-hover-color);
+      --toolbarButtonBackgroundActiveColor: var( --icon-button-background-active-color);
+      --toolbarIconHoverFill: var( --th-slate);
+      --toolbarIconToggleFill: var( --primaryColor);
+      --dashboardContentBackgroundColor: #fff;
+      --dashboardHeaderBackgroundColor: #fff;
+      --dashboardSidebarBorderTopColor: var( --lightGrey);
+      --dashboardTextColor: var(--th-slate);
+      --dashboardTitleTextColor: var(--fontColorDark);
+      --dashboardSubTitleTextColor: var(--th-slate-light);
+      --dashboardCardBackgroundColor: var(--white);
+      --dashboardCardBackgroundHoverColor: var(--th-grey-light);
+      --dashboardCardBackgroundActiveColor: var(--lightGrey);
+      --dashboardCardHighlightColor: var(--primaryColor);
+      --dashboardCardBorderColor: var(--lightGrey);
+      --dashboardCardFooterLinkColor: var(--primaryColor);
+      --dashboardCardAuditorColor: hsl(208, 100%, 43%);
+      --dashboardCardAuditorLabelColor: hsl(208, 100%, 43%);
+      --dashboardCardEditorLabelColor: var(--reachDeckEditorColor);
+      --dashboardCardToolbarColor: var(--primaryColorOrange);
+      --dashboardCardToolbarLabelColor: var(--primaryColorOrange);
+      --dashboardPaneBackgroundColor: #fcfcfc;
+      --dashboardPaneBorderColor: rgba(92, 106, 138, 0.4);
+      --dashboardPaneDashedBorderColor: var(--dashboardDashedBorderLight);
+      --dashboardDashedBorderLight: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%235C6A8ACC' stroke-width='2' stroke-dasharray='4%2c 8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+      --dashboardDashedBorderDark: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23323E52FF' stroke-width='2' stroke-dasharray='4%2c 8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+      --icon-opacity: 1;
+      --accordionBackgroundColor: #fff;
+      --accordionTextColor: #484848;
+      --accordionTextBottomColor: #484848;
+      --accordionIconColor: var(--toolbarWhite);
+      --accordionBackgroundColorHover: #f9fafb;
+      --tableBackgroundColor: none;
+      --tableBackgroundHeaderColor: #F9FAFB;
+      --tableBackgroundAltColor: #f7f7f7;
+      --tableBackgroundHoverColor: hsl(210, 20%, 98%);
+      --tableBorderColor: #E2E2E3;
+      --tableTextColor: #484848;
+    }
+    
+    /* stylelint-disable */
+    /* stylelint-enable */
+    .th-wq,
+    .th-th {
+      --toolbarBackgroundColor: var(--defaultColor);
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorWriq);
+      --themeColorSecondary: var(--secondaryColor);
+      --dashboardTopColor: var(--brandColorTeal);
+      --dashboardTitleColor: var(--themeColorWriq);
+      --iconFillColor: var(--white);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorTeal);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorTealHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorTealActive);
+      --primaryButtonBorderActive: var(--buttonBorderTealActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderTeal);
+      --primaryButtonBorderHover: var(--buttonBorderTealHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+    }
+    
+    .th-rw,
+    .th-wa {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorReadWrite);
+      --themeColorSecondary: var(--secondaryColor);
+      --toolbarBackgroundColor: var(--defaultColor);
+      --toolbarIconFill: var(--th-slate);
+      --toolbarIconHoverFill: var(--th-slate);
+      --toolbarIconActiveFill: var(--th-slate);
+      --toolbarIconToggledHoverFill: var(--primaryColorPurple);
+      --toolbarIconToggleFill: var(--primaryColorPurple);
+      --toolbarIconToggleHoverFill: var(--primaryColorPurple);
+      --dashboardTopColor: var(--brandColorPurple);
+      --dashboardTitleColor: var(--themeColorReadWrite);
+      --iconFillColor: var(--th-slate-dark);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderActive: var(--buttonBorderColorActive);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorPurple);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorPurpleHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorPurpleActive);
+      --primaryButtonBorderActive: var(--buttonBorderPurpleActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderPurple);
+      --primaryButtonBorderHover: var(--buttonBorderPurpleHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+      --menuNotifyBackgroundColour: var(--brandColorPurple);
+      --uniloginBackgroundColor: #FAF7FF;
+      --uniloginWindowBackgroundColor: var(--primaryColorPurple);
+    }
+    
+    .th-pr {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorPdfReader);
+      --themeColorSecondary: var(--secondaryColor);
+      --primaryButtonBackgroundColor: var(--primaryColorBlue);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorBlueHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorBlueActive);
+      --primaryButtonBorderActive: var(--buttonBorderBlueActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderBlue);
+      --primaryButtonBorderHover: var(--buttonBorderBlueHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --toolbarBackgroundColor: var(--th-grey);
+      --toolbarButtonBackgroundColor: var(--th-grey);
+      --toolbarButtonBackgroundHoverColor: var(--ContrastPinkOrbitNoteHover);
+      --toolbarButtonBackgroundActiveColor: var(--ContrastPinkOrbitNoteActive);
+      --toolbarButtonBorderActive: var(--ContrastButtonBorderPink);
+      --toolbarIconFill: var(--th-slate);
+      --toolbarIconHoverFill: var(--white);
+      --toolbarIconActiveFill: var(--white);
+      --toolbarIconToggleFill: var(--ContrastPinkOrbitNoteActive);
+      --toolbarIconToggleHoverFill: var(--white);
+      --toolbarIconToggledHoverFill: var(--white);
+      --iconButtonBackgroundDefaultColor: var(--icon-button-background-default-color);
+      --iconButtonBackgroundHoverColor: var(--icon-button-background-hover-color);
+      --iconButtonBackgroundActiveColor: var(--icon-button-background-active-color);
+      --iconButtonBorderColor: 2px solid transparent;
+      --iconFillColor: var(--th-slate);
+      --panelBackgroundColor: var(--th-grey-light);
+      --panelBackgroundColorLight: var(--white);
+      --panelBackgroundColorDark: var(--th-grey);
+      --fontColor: var(--th-slate-dark);
+      --borderColor: 1px solid var(--th-grey-dark);
+      --settingsTitleColor: var(--themeColorPrimary);
+      --menuNotifyBackgroundColour: var(--brandColorPink);
+      --dashboardTopColor: var(--primaryColorBlue);
+      --dashboardTitleColor: var(--themeColorEquatio);
+      --cardIconFillColor: var(--primaryColorBlue);
+    }
+    
+    .th-eq {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorEquatio);
+      --themeColorSecondary: var(--secondaryColor);
+      --dashboardTopColor: var(--brandColorBlue);
+      --dashboardTitleColor: var(--themeColorEquatio);
+      --iconFillColor: var(--th-slate-dark);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorBlue);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorBlueHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorBlueActive);
+      --primaryButtonBorderActive: var(--buttonBorderBlueActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderBlue);
+      --primaryButtonBorderHover: var(--buttonBorderBlueHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+      --uniloginBackgroundColor: #F2F9FF;
+      --uniloginWindowBackgroundColor: var(--brandColorBlueWCAG);
+    }
+    
+    .th-ba {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorBrowsealoud);
+      --themeColorSecondary: var(--secondaryColor);
+      --toolbarBackgroundColor: var(--th-grey);
+      --toolbarIconButtonFillColor: var(--th-slate);
+      --toolbarButtonBackgroundColor: var(--th-grey);
+      --toolbarButtonBackgroundHoverColor: var(--primaryColorOrangeHover);
+      --toolbarButtonBackgroundActiveColor: var(--primaryColorOrangeActive);
+      --toolbarButtonBorderActive: var(--buttonBorderOrange);
+      --toolbarIconFill: var(--th-slate);
+      --toolbarIconHoverFill: var(--th-slate);
+      --toolbarIconActiveFill: var(--primaryColorBlue);
+      --toolbarIconToggleFill: var(--primaryColorBlue);
+      --toolbarIconToggleHoverFill: var(--white);
+      --dashboardTopColor: var(--brandColorOrange);
+      --dashboardTitleColor: var(--themeColorBrowsealoud);
+      --iconFillColor: var(--white);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorOrange);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorOrangeHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorOrangeActive);
+      --primaryButtonBorderActive: var(--buttonBorderOrangeActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderOrange);
+      --primaryButtonBorderHover: var(--buttonBorderOrangeHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+      --menuNotifyBackgroundColour: var(--white);
+    }
+    .th-ba .gw-menu-notification--inline {
+      --menuNotifyBackgroundColour: var(--themeColorBrowsealoud);
+    }
+    
+    .th-at {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorReachDeck);
+      --themeColorSecondary: var(--secondaryColor);
+      --toolbarBackgroundColor: var(--defaultColor);
+      --toolbarIconFill: var(--th-slate);
+      --toolbarIconHoverFill: var(--th-slate);
+      --toolbarIconActiveFill: var(--th-slate);
+      --toolbarIconToggledHoverFill: var(--primaryColorBlue);
+      --toolbarIconToggleFill: var(--primaryColorBlue);
+      --toolbarIconToggleHoverFill: var(--primaryColorBlue);
+      --dashboardTopColor: var(--th-grey);
+      --dashboardTitleColor: var(--th-slate-dark);
+      --iconFillColor: var(--th-slate-dark);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorReachDeck);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorReachDeckHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorReachDeckActive);
+      --primaryButtonBorderActive: var(--buttonBorderReachDeckActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderReachDeck);
+      --primaryButtonBorderHover: var(--buttonBorderReachDeckHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --dashboardTopColor: #E12362;
+      --dashboardContentBackgroundColor: #F2F5F9;
+      --tableBackgroundHeaderColor: #DFE1E5;
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+    }
+    
+    .th-rd {
+      font-size: 10px;
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorReachDeck);
+      --themeColorSecondary: var(--secondaryColor);
+      --toolbarBackgroundColor: var(--defaultColor);
+      --toolbarIconFill: var(--th-slate);
+      --toolbarIconHoverFill: var(--th-slate);
+      --toolbarIconActiveFill: var(--th-slate);
+      --toolbarIconToggledHoverFill: var(--primaryColorBlue);
+      --toolbarIconToggleFill: var(--primaryColorBlue);
+      --toolbarIconToggleHoverFill: var(--primaryColorBlue);
+      --dashboardTopColor: var(--th-grey);
+      --dashboardTitleColor: var(--th-slate-dark);
+      --iconFillColor: var(--th-slate-dark);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorReachDeck);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorReachDeckHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorReachDeckActive);
+      --primaryButtonBorderActive: var(--buttonBorderReachDeckActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderReachDeck);
+      --primaryButtonBorderHover: var(--buttonBorderReachDeckHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+    }
+    
+    .th-ss {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorSpeechStream);
+      --themeColorSecondary: var(--secondaryColor);
+      --dashboardTopColor: var(--brandColorPink);
+      --dashboardTitleColor: var(--themeColorSpeechStream);
+      --iconFillColor: var(--th-slate-dark);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--themeColorSpeechStream);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorPinkHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorPinkActive);
+      --primaryButtonBorderActive: var(--buttonBorderPinkActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderPink);
+      --primaryButtonBorderHover: var(--buttonBorderPinkHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+    }
+    
+    .th-st {
+      --uniloginBackgroundColor: #F2F9FF;
+      --uniloginWindowBackgroundColor: #2A3953;
+    }
+    
+    .th-sv,
+    .th-ft {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorFluencyTutor);
+      --themeColorSecondary: var(--secondaryColor);
+      --dashboardTopColor: var(--brandColorGreen);
+      --dashboardTitleColor: var(--themeColorFluencyTutor);
+      --iconFillColor: var(--th-slate-dark);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--themeColorFluencyTutor);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorGreenHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorGreenActive);
+      --primaryButtonBorderActive: var(--buttonBorderGreenActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderGreen);
+      --primaryButtonBorderHover: var(--buttonBorderGreenHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+    }
+    
+    .th-cr {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--primaryColorClaroNavy);
+      --themeColorSecondary: var(--secondaryColor);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorClaroNavy);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorClaroNavyHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorClaroNavyActive);
+      --primaryButtonBorderActive: var(--buttonBorderClaroActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderClaro);
+      --primaryButtonBorderHover: var(--buttonBorderClaroHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --altButtonBackgroundColor: var(--altColor);
+      --altButtonBackgroundHoverColor: var(--altColorHover);
+      --altButtonBackgroundActiveColor: var(--altColorActive);
+      --altButtonTextColor: var(--fontColorWhite);
+      --altButtonTextHoverColor: var(--fontColorWhite);
+      --altButtonTextActiveColor: var(--fontColorWhite);
+      --altButtonTextVisitedColor: var(--fontColorWhite);
+      --altButtonBorder: var(--altButtonBorder);
+      --altButtonBorderHover: var(--altButtonBorderColorHover);
+      --altButtonBorderRadius: var(--buttonRoundness);
+      --altButtonIconFillColor: var(--white);
+      --uniloginBackgroundColor: #F2F9FF;
+      --uniloginWindowBackgroundColor: var(--themeColorPrimary);
+    }
+    
+    .th-wh {
+      background: #F6F6F6;
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--primaryColorClaroNavy);
+      --themeColorSecondary: var(--secondaryColor);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorClaroBlue);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorClaroBlueHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorClaroBlueActive);
+      --primaryButtonBorderActive: var(--buttonBorderClaroActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--primaryColorClaroBlue);
+      --primaryButtonBorderHover: var(--primaryColorClaroBlueHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --altButtonBackgroundColor: var(--altColor);
+      --altButtonBackgroundHoverColor: var(--altColorHover);
+      --altButtonBackgroundActiveColor: var(--altColorActive);
+      --altButtonTextColor: var(--fontColorWhite);
+      --altButtonTextHoverColor: var(--fontColorWhite);
+      --altButtonTextActiveColor: var(--fontColorWhite);
+      --altButtonTextVisitedColor: var(--fontColorWhite);
+      --altButtonBorder: var(--altButtonBorder);
+      --altButtonBorderHover: var(--altButtonBorderColorHover);
+      --altButtonBorderRadius: var(--buttonRoundness);
+      --altButtonIconFillColor: var(--white);
+      --uniloginBackgroundColor: #F2F9FF;
+      --uniloginWindowBackgroundColor: var(--primaryColorClaroNavy);
+    }
+    
+    .th-lds {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--primaryColorLingdys);
+      --themeColorSecondary: var(--secondaryColor);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorLingdys);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorLingdysHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorLingdysActive);
+      --primaryButtonBorderActive: var(--buttonBorderLingdysActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderLingdys);
+      --primaryButtonBorderHover: var(--buttonBorderLingdysHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --altButtonBackgroundColor: var(--altColor);
+      --altButtonBackgroundHoverColor: var(--altColorHover);
+      --altButtonBackgroundActiveColor: var(--altColorActive);
+      --altButtonTextColor: var(--fontColorWhite);
+      --altButtonTextHoverColor: var(--fontColorWhite);
+      --altButtonTextActiveColor: var(--fontColorWhite);
+      --altButtonTextVisitedColor: var(--fontColorWhite);
+      --altButtonBorder: var(--altButtonBorder);
+      --altButtonBorderHover: var(--altButtonBorderColorHover);
+      --altButtonBorderRadius: var(--buttonRoundness);
+      --altButtonIconFillColor: var(--white);
+      --uniloginBackgroundColor: #F2F9FF;
+      --uniloginWindowBackgroundColor: var(--themeColorPrimary);
+    }
+    
+    .th-aw {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--primaryColorClaroNavy);
+      --themeColorSecondary: var(--secondaryColor);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorAppWriter);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorAppWriterHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorAppWriterActive);
+      --primaryButtonBorderActive: var(--buttonBorderAppWriterActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderAppWriter);
+      --primaryButtonBorderHover: var(--buttonBorderAppWriterHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --altButtonBackgroundColor: var(--altColor);
+      --altButtonBackgroundHoverColor: var(--altColorHover);
+      --altButtonBackgroundActiveColor: var(--altColorActive);
+      --altButtonTextColor: var(--fontColorWhite);
+      --altButtonTextHoverColor: var(--fontColorWhite);
+      --altButtonTextActiveColor: var(--fontColorWhite);
+      --altButtonTextVisitedColor: var(--fontColorWhite);
+      --altButtonBorder: var(--altButtonBorder);
+      --altButtonBorderHover: var(--altButtonBorderColorHover);
+      --altButtonBorderRadius: var(--buttonRoundness);
+      --altButtonIconFillColor: var(--white);
+      --uniloginBackgroundColor: #F7F7F7;
+      --uniloginWindowBackgroundColor: var(--primaryColorAppWriter);
+    }
+    
+    .dark-mode {
+      --toolbarBackgroundColor: var(--th-slate-dark);
+      --toolbarButtonBackgroundColor: var(--th-slate-dark);
+      --toolbarButtonBackgroundHoverColor: var(--icon-button-background-hover-color-dark);
+      --toolbarButtonBackgroundActiveColor: var(--icon-button-background-active-color-dark);
+      --toolbarButtonBorderActive: var(--buttonBorderPink);
+      --toolbarIconFill: var(--white);
+      --toolbarIconHoverFill: var(--white);
+      --toolbarIconActiveFill: var(--white);
+      --dashboardHeaderBackgroundColor: var(--th-slate-dark);
+      --dashboardSidebarBorderTopColor: var(--th-slate);
+      --dashboardSidebarBackgroundColor: var(--th-slate-dark);
+      --dashboardContentBackgroundColor: var(--th-slate);
+      --dashboardCardBackgroundColor: var(--th-slate-dark);
+      --dashboardCardBackgroundHoverColor: var(--th-slate-dark-hover600);
+      --dashboardCardBackgroundActiveColor: var(--th-slate-dark-active600);
+      --dashboardCardHighlightColor: var(--brandColorBlue);
+      --dashboardTextColor: var(--th-white);
+      --dashboardTitleTextColor: var(--th-white);
+      --dashboardSubTitleTextColor: var(--th-white);
+      --menuIconFillColor: var(--white);
+      --iconButtonBackgroundDefaultColor: var(--icon-button-background-default-color-dark);
+      --iconButtonBackgroundHoverColor: var(--icon-button-background-hover-color-dark);
+      --iconButtonBackgroundActiveColor: var(--icon-button-background-active-color-dark);
+      --iconButtonBorderColor: 2px solid transparent;
+      --iconFillColor: var(--white);
+      --buttonLinkTextColor: var(--white);
+      --buttonLinkIconColor: var(--white);
+      --buttonNoBackgroundTextColor: var(--white);
+      --buttonNoBackgroundIconColor: var(--white);
+      --buttonNoBackgroundColor: transparent;
+      --buttonNoBackgroundColorHover: var(--icon-button-background-hover-color-dark);
+      --buttonNoBackgroundColorActive: var(--icon-button-background-active-color-dark);
+      --buttonNoBackgroundBorder: 2px solid transparent;
+      --buttonNoBackgroundBorderHover: 2px solid transparent;
+      --buttonNoBackgroundBorderActive: 2px solid transparent;
+      --panelBackgroundColor: var(--th-slate);
+      --panelBackgroundColorLight: var(--th-slate-light);
+      --panelBackgroundColorDark: var(--th-slate-dark);
+      --fontColor: var(--textColorLight);
+      --borderColor: 1px solid var(--th-slate-light);
+      --infoBackgroundColor: var(--notificationDarkModeBackground);
+      --successBackgroundColor: var(--notificationDarkModeBackground);
+      --errorBackgroundColor: var(--notificationDarkModeBackground);
+      --warningBackgroundColor: var(--notificationDarkModeBackground);
+      --infoBorderColor: var(--notificationDarkModeBorder);
+      --successBorderColor: var(--notificationDarkModeBorder);
+      --errorBorderColor: var(--notificationDarkModeBorder);
+      --warningBorderColor: var(--notificationDarkModeBorder);
+      --infoWarningColor: #fff;
+      --successWarningColor: #fff;
+      --errorWarningColor: #fff;
+      --warningWarningColor: #fff;
+      --infoTitleColor: #fff;
+      --successTitleColor: #fff;
+      --errorTitleColor: #fff;
+      --warningTitleColor: #fff;
+      --accordionBackgroundColor: var(--th-slate-dark);
+      --accordionTextColor: #fff;
+      --accordionTextBottomColor: #f5f5f5;
+      --accordionIconColor: var(--toolbarWhite);
+      --accordionBackgroundColorHover: var(--th-slate-dark-hover600);
+      --tableBackgroundColor: var(--th-slate);
+      --tableBackgroundHeaderColor: var(--th-slate-alt);
+      --tableBackgroundAltColor: var(--th-slate-alt);
+      --tableBackgroundHoverColor: var(--th-slate-hover);
+      --tableBorderColor: var(--th-slate-dark);
+      --tableTextColor: #fff;
+      --ListGroupSearchItemColor: var(--th-slate-dark);
+      --ListGroupSearchItemColorHover: var(--th-slate-dark-hover800);
+      --ListGroupSearchItemTextColor: var(--th-white);
+      --ListGroupSearchItemBorderColor:rgba(0, 0, 0, 0.225);
+      --ListGroupSearchItemAsideColor: var(--th-slate-dark);
+      --ListGroupSearchItemAsideTextColor: #fff;
+    }
+    .dark-mode.th-rw {
+      --toolbarIconActiveFill: var(--white);
+      --toolbarIconToggledHoverFill: var(--brandColorPurple);
+      --toolbarIconToggleFill: var(--brandColorPurple);
+      --toolbarIconToggleHoverFill: var(--brandColorPurple);
+    }
+    .dark-mode.th-pr {
+      --toolbarButtonBackgroundHoverColor: var(--primaryColorBlue);
+      --toolbarButtonBackgroundActiveColor: var(--primaryColorBlueHover);
+      --toolbarButtonBorderActive: var(--buttonBorderBlueActive);
+      --toolbarIconToggleFill: var(--iconToggleFillOrbitNote);
+      --textColor: var(--textColorLight);
+      --cardIconFillColor: var(--brandColorBlue);
+      --primaryButtonBackgroundColor: var(--primaryColor);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorActive);
+      --primaryButtonBorderActive: var(--primaryButtonBorderActive);
+      --primaryButtonBorder: var(--primaryButtonBorder);
+      --primaryButtonBorderHover: var(--primaryButtonBorderHover);
+      --dashboardTopColor: var(--primaryColorBlue);
+      --dashboardTitleColor: var(--themeColorEquatio);
+      --dashboardPaneBackgroundColor: var(--th-slate-dark);
+      --dashboardPaneBorderColor: var(--th-slate-dark);
+      --dashboardPaneDashedBorderColor: var(--dashboardDashedBorderDark);
+      --listGroupItemBackgroundColor: var(--th-slate-dark);
+      --listGroupItemBackgroundColorHover: var(--th-slate-dark-hover800);
+      --listGroupItemBackgroundColorActive: var(--th-slate-dark-active800);
+      --listGroupTileBackgroundColorActive: var(--th-slate-dark-active800);
+      --list-item-hover: var(--listGroupItemBackgroundColorHover);
+    }
+    .dark-mode.th-rd {
+      --toolbarIconToggledHoverFill: var(--brandColorBlue);
+      --toolbarIconToggleFill: var(--brandColorBlue);
+      --toolbarIconToggleHoverFill: var(--brandColorBlue);
+      --dashboardTopColor: var(--th-slate);
+      --dashboardCardAuditorColor: var(--primaryColorBlue);
+      --dashboardCardAuditorLabelColor: var(--th-grey);
+      --dashboardCardEditorColor: var(--reachDeckEditorColor);
+      --dashboardCardEditorLabelColor: var(--th-grey);
+      --dashboardCardToolbarColor: var(--primaryColorOrange);
+      --dashboardCardToolbarLabelColor: var(--th-grey);
+      --dashboardCardBorderColor: var(--th-slate-light);
+      --dashboardCardFooterLinkColor: hsl(197, 100%, 50%);
+      --icon-opacity: .9;
+      --cardIconFillColor: var(--th-white);
+      --listGroupItemBackgroundColor: var(--th-slate-dark);
+      --listGroupItemBackgroundColorHover: var(--th-slate-dark-hover800);
+      --listGroupItemBackgroundColorActive: var(--th-slate-dark-active800);
+      --listGroupTileBackgroundColorActive: var(--th-slate-dark-active800);
+      --list-item-hover: var(--listGroupItemBackgroundColorHover);
+    }
+    .dark-mode {
+      --inputBorder: 1px solid var(--th-slate);
+      --inputTextColor: var( --th-white);
+      --inputBackgroundColor: var(--th-cool-grey-800);
+      --modalHeaderBackgroundColor: var(--th-cool-grey-800);
+      --modalContentBackgroundColor: var(--th-cool-grey-700);
+      --modalContentBorderColorHeader: var(--th-cool-grey-700);
+      --modalContentBorderColorFooter: var(--th-cool-grey-700);
+      --modalTextColor: var(--th-white);
+      --settingsDialogBackgroundColor: var(--th-cool-grey-700);
+      --settingsDialogMenuBackgroundColor: var(--th-cool-grey-800);
+      --settingsDialogItemSelectedBackgroundColor: var(--th-slate-dark);
+      --settingsDialogItemBackgroundColorHover: var(--th-cool-grey-700);
+      --settingsDialogItemBackgroundColorActive: var(--th-cool-grey-600);
+      --settingsTitleColor: #fff;
+      --selectBorder: 1px solid var( --slate-light);
+      --selectBackgroundColor: var( --th-slate);
+      --selectBackgroundColorHover: rgba(255, 255, 255, 0.146);
+      --selectBackgroundColorActive: rgba(255, 255, 255, 0.221);
+    }
+    .dark-mode .gw-select {
+      background: transparent url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' height='22px' width='22px' viewBox='0 0 18 18'>%3Cpath d='M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z' fill='%23fff'/%3E%3Cpath d='M0-.75h24v24H0z' fill='none'/%3E</svg>") no-repeat;
+      background-repeat: no-repeat, repeat;
+      background-position: right 0.9em top 40%, 0 0;
+      background-color: #434e65 transparent;
+      border: 1px solid #fff;
+      background-size: 1.3em auto, 100%;
+      color: #fff;
+    }
+    .dark-mode .gw-select > option {
+      background: #434e65;
+    }
+    .dark-mode {
+      --listGroupBackgroundColor: transparent;
+      --listGroupItemTextColor: var(--th-white);
+      --listGroupItemBackgroundColor: var(--th-cool-grey-800);
+      --listGroupItemActionsBackgroundColor: var(--th-cool-grey-850);
+      --listGroupItemBackgroundColorHover: var(--th-cool-grey-700);
+      --listGroupItemBackgroundColorActive: var(--th-cool-grey-600);
+      --listGroupItemIconColor: var(--th-white);
+      --listGroupItemArrowColor: var(--th-cool-grey-800);
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      :root .day.dark-scheme {
+        background: #333;
+        color: white;
+      }
+      :root .night.dark-scheme {
+        background: black;
+        color: #ddd;
+      }
+    }
+    @media (prefers-color-scheme: light) {
+      :root .day.light-scheme {
+        background: white;
+        color: #555;
+      }
+      :root .night.light-scheme {
+        background: #eee;
+        color: black;
+      }
+    }.th-rw {
+      --listGroupItemBackgroundColorActive: white;
+      --squareButtonBackgroundHover: #f5f5f5;
+      --squareButtonIconFillColor: rgb(36, 42, 56);
+      --squareButtonActiveBackGroundColor: #EFEFEF;
+      --squareButtonIconTickColor: #506C7E ;
+    }
+    
+    .dark-mode {
+      --listGroupItemBackgroundColorFocus: rgb(63, 79, 90);
+      --modalTextColorFocus: white;
+      --listGroupItemBackgroundColorActive: rgb(36, 45, 51);
+      --modalTextColorActive: white;
+      --squareButtonBackgroundHover: rgb(56, 71, 81);
+      --squareButtonIconFillColor: white;
+      --squareButtonActiveBackGroundColor: #24323E;
+      --squareButtonIconTickColor: #FFF ;
+    }
+    
+    .dark-mode.th-rw {
+      --toolbarIconButtonFillColor: var(--white);
+    }
+    
+    .gw-toolbar--s1 {
+      --fontSize: 5px;
+    }
+    
+    .gw-toolbar--s2 {
+      --fontSize: 10px;
+    }
+    
+    .gw-toolbar--s3 {
+      --fontSize: 15px;
+    }
+    
+    .gw-toolbar--s4 {
+      --fontSize: 20px;
+    }
+    
+    .gw-listitem-fontsize-s10 {
+      --gw-listitem-fontsize: 10px !important;
+    }
+    
+    .gw-listitem-fontsize-s11 {
+      --gw-listitem-fontsize: 11px !important;
+    }
+    
+    .gw-listitem-fontsize-s12 {
+      --gw-listitem-fontsize: 12px !important;
+    }
+    
+    .gw-listitem-fontsize-s13 {
+      --gw-listitem-fontsize: 13px !important;
+    }
+    
+    .gw-listitem-fontsize-s14 {
+      --gw-listitem-fontsize: 14px !important;
+    }
+    
+    .gw-listitem-fontsize-s15 {
+      --gw-listitem-fontsize: 15px !important;
+    }
+    
+    .gw-listitem-fontsize-s16 {
+      --gw-listitem-fontsize: 16px !important;
+    }
+    
+    .gw-listitem-fontsize-s17 {
+      --gw-listitem-fontsize: 17px !important;
+    }
+    
+    .gw-listitem-fontsize-s18 {
+      --gw-listitem-fontsize: 18px !important;
+    }
+    
+    .gw-listitem-fontsize-s19 {
+      --gw-listitem-fontsize: 19px !important;
+    }
+    
+    .gw-listitem-fontsize-s20 {
+      --gw-listitem-fontsize: 20px !important;
+    }
+    
+    .gw-listitem-fontsize-s21 {
+      --gw-listitem-fontsize: 21px !important;
+    }
+    
+    .gw-listitem-fontsize-s22 {
+      --gw-listitem-fontsize: 22px !important;
+    }
+    
+    .gw-listitem-fontsize-s23 {
+      --gw-listitem-fontsize: 23px !important;
+    }
+    
+    .gw-listitem-fontsize-s24 {
+      --gw-listitem-fontsize: 24px !important;
+    }
+    
+    :root {
+      --fontSize: 10px;
+    }
+    
+    .gw-info {
+      --notification-bg-color: var(--infoBackgroundColor);
+      --notification-border-color: var(--infoBorderColor);
+      --notification-color: var(--infoTitleColor);
+    }
+    
+    .gw-success {
+      --notification-bg-color: var(--successBackgroundColor);
+      --notification-border-color: var(--successBorderColor);
+      --notification-color: var(--successTitleColor);
+    }
+    
+    .gw-error {
+      --notification-bg-color: var(--errorBackgroundColor);
+      --notification-border-color: var(--errorBorderColor);
+      --notification-color: var(--errorTitleColor);
+    }
+    
+    .gw-warning {
+      --notification-bg-color: var(--warningBackgroundColor);
+      --notification-border-color: var(--warningBorderColor);
+      --notification-color: var(--warningTitleColor);
+    }
+    
+    .th-rw {
+      --toolbarIconToggleFill: var(--primaryColorPurple);
+      --toolbarIconToggleHoverFill: var(--primaryColorPurple);
+    }
+    
+    .gw-toolbar--undocked {
+      --toolbarWidth: fit-content;
+      --toolbarDisplay: block;
+      --toolbarPosition: fixed;
+    }
+    
+    .gw-ul--small {
+      --liWidth: 150px;
+    }
+    
+    .gw-ul--medium {
+      --liWidth: 300px;
+    }
+    
+    .gw-ul--large {
+      --liWidth: 450px;
+    }
+    
+    gw-radio label.gw-radio__input-label b {
+      font-weight: var(--label-bold-font-weight, bold);
+      font-size: var(--label-bold-font-size, 1.4em);
+      font-family: var(--label-bold-font-family, "Open Sans", sans-serif);
+      color: var(--label-bold-color, inherit);
+    }
+    
+    gw-radio label.gw-radio__input-label u {
+      text-decoration: underline;
+      font-size: 1em; /* Inherit from parent label (1.2em) */
+      font-weight: normal;
+    }
+  </style>
+  <style></style>
+  <style>
+    /* stylelint-disable */
+    /* stylelint-enable */
+    /** Buttons
+    ---------------------------------------------------------*/
+    :root {
+      --transparent: rgba(255, 255, 255, 0);
+      --white: hsl(0, 0%, 100%);
+      --th-white: hsl(0, 0%, 100%);
+      --black: hsl(0, 0%, 0%);
+      --th-black: hsl(0, 0%, 0%);
+      --lightGrey: hsl(0, 0%, 94%);
+      --th-grey-white: hsl(210, 10%, 97%);
+      --th-grey-light: hsl(210, 10%, 94.8%);
+      --th-grey-medium: hsl(212, 10%, 94%);
+      --th-grey: hsl(216, 22%, 91%);
+      --th-grey-dark: hsl(221, 20%, 78%);
+      --th-slate: hsl(221, 20%, 33%);
+      --th-slate-light: hsl(222, 20%, 45%);
+      --th-slate-dark: hsl(222, 22%, 18%);
+      --th-slate-alt: #333F57;
+      --th-slate-hover:#3E4A62;
+      --th-slate-dark-hover800:hsl(220, 22%, 24%);
+      --th-slate-dark-active800:hsl(219, 24%, 26%);
+      --th-slate-dark-hover600:hsl(222, 22%, 21%);
+      --th-slate-dark-active600:hsl(221, 24%, 23%);
+      --th-cool-grey-600: hsl(203, 16%, 44%);
+      --th-cool-grey-700: hsl(204, 18%, 30%);
+      --th-cool-grey-750: hsl(203, 18%, 32%);
+      --th-cool-grey-800: hsl(209, 20%, 25%);
+      --th-cool-grey-850: hsl(209, 20%, 21%);
+      --th-cool-grey-900: hsl(210, 24%, 16%);
+      --fontColorDark: var( --th-slate-dark);
+      --fontColorWhite: hsl(0, 0%, 100%);
+      --list-item-hover:hsl(225, 20%, 96%);
+      --list-item-light-hover: hsl(210, 20%, 98%);
+      --list-item-hover-dark:hsla(222, 22%, 18%, 0.50);
+      --list-item-light-hover-dark: hsla(222, 20%, 33%, 0.50);
+      --greyTransparent: hsla(222, 22%, 18%, 0.12);
+      --whiteTransparent: hsla(0, 0%, 100%, 0.12);
+      --defaultColor: hsl(220, 20%, 91%);
+      --defaultColorHover: hsl(220, 19%, 78%);
+      --defaultColorActive: hsl(220, 19%, 68%);
+      --defaultColorSelected: hsl(221, 20%, 75%);
+      --buttonBorderColor: 2px solid hsl(220, 20%, 91%);
+      --buttonBorderColorHover: 2px solid hsl(220, 19%, 78%);
+      --buttonBorderColorActive: 2px solid hsl(220, 19%, 68%);
+      --buttonBorderColorSelected: 2px solid hsl(221, 20%, 75%);
+      --iconFillColor: var( --th-slate-dark );
+      --primaryColor: hsl(211, 100%, 45%);
+      --primaryColorHover: hsl(211, 100%, 35%);
+      --primaryColorActive: hsl(211, 100%, 25%);
+      --primaryButtonBorder: 2px solid hsl(211, 100%, 45%);
+      --primaryButtonBorderHover: 2px solid hsl(211, 100%, 35%);
+      --primaryButtonBorderActive: 2px solid hsl(211, 100%, 25%);
+      --secondaryColor: var(--th-slate);
+      --secondaryColorHover: hsl(221, 20%, 23%);
+      --secondaryColorActive: hsl(221, 20%, 13%);
+      --secondaryButtonBorderColor: 2px solid var(--th-slate);
+      --secondaryButtonBorderColorHover: 2px solid hsl(221, 20%, 23%);
+      --secondaryButtonBorderColorActive: 2px solid hsl(221, 20%, 13%);
+      --disabledColor: hsl(0, 0%, 50%);
+      --disabledBackgroundColor: hsl(0, 0%, 95%);
+      --brandColorGreen: hsl(76, 60%, 52%);
+      --brandColorGreenActive: hsl(76, 62%, 40%);
+      --primaryColorGreen: hsl(79, 100%, 24%);
+      --primaryColorGreenHover: hsl(79, 100%, 14%);
+      --primaryColorGreenActive: hsl(79, 100%, 4%);
+      --buttonBorderGreen: 2px solid hsl(79, 100%, 24%);
+      --buttonBorderGreenHover: 2px solid hsl(79, 100%, 14%);
+      --buttonBorderGreenActive: 2px solid hsl(79, 100%, 4%);
+      --brandColorPink: hsl(344, 98%, 59%);
+      --primaryColorPink: #e12362;
+      --primaryColorPinkHover: hsl(340, 76%, 41%);
+      --primaryColorPinkActive: hsl(340, 76%, 31%);
+      --buttonBorderPink: 2px solid hsl(340, 76%, 51%);
+      --buttonBorderPinkHover: 2px solid hsl(340, 76%, 41%);
+      --buttonBorderPinkActive: 2px solid hsl(340, 76%, 31%);
+      --brandColorTeal: hsl(180, 85%, 34%);
+      --primaryColorTeal: hsl(184, 50%, 35%);
+      --primaryColorTealHover: hsl(184, 50%, 25%);
+      --primaryColorTealActive: hsl(184, 50%, 15%);
+      --buttonBorderTeal: 2px solid hsl(184, 50%, 35%);
+      --buttonBorderTealHover: 2px solid hsl(184, 50%, 25%);
+      --buttonBorderTealActive: 2px solid hsl(184, 50%, 15%);
+      --brandColorPurple: hsl(264, 100%, 68%);
+      --primaryColorPurple: hsl(264, 83%, 62%);
+      --primaryColorPurpleHover: hsl(264, 83%, 52%);
+      --primaryColorPurpleActive: hsl(264, 83%, 42%);
+      --buttonBorderPurple: 2px solid hsl(264, 83%, 62%);
+      --buttonBorderPurpleHover: 2px solid hsl(264, 83%, 52%);
+      --buttonBorderPurpleActive: 2px solid hsl(264, 83%, 42%);
+      --brandColorOrange: hsl(33, 94%, 48%);
+      --primaryColorOrange: hsl(15, 79%, 45%);
+      --primaryColorOrangeHover: hsl(15, 80%, 35%);
+      --primaryColorOrangeActive: hsl(15, 80%, 25%);
+      --buttonBorderOrange: 2px solid hsl(15, 79%, 45%);
+      --buttonBorderOrangeHover: 2px solid hsl(15, 80%, 35%);
+      --buttonBorderOrangeActive: 2px solid hsl(15, 80%, 25%);
+      --brandColorBlue: hsl(197, 100%, 50%);
+      --brandColorBlueActive: hsl(197, 100%, 39%);
+      --brandColorBlueWCAG: hsl(197, 100%, 42%);
+      --primaryColorBlue: hsl(201, 100%, 37%);
+      --primaryColorBlueHover: hsl(201, 100%, 27%);
+      --primaryColorBlueActive: hsl(201, 100%, 17%);
+      --buttonBorderBlue: 2px solid hsl(201, 100%, 37%);
+      --buttonBorderBlueHover: 2px solid hsl(201, 100%, 27%);
+      --buttonBorderBlueActive: 2px solid hsl(201, 100%, 17%);
+      --BrandcolorYellow: hsl(41, 90%, 61%);
+      --primaryColorReachDeck: hsl(209, 100%, 39%);
+      --primaryColorReachDeckHover: hsl(209, 100%, 29%);
+      --primaryColorReachDeckActive: hsl(209, 100%, 19%);
+      --buttonBorderReachDeck: 2px solid hsl(209, 100%, 39%);
+      --buttonBorderReachDeckHover: 2px solid hsl(209, 100%, 29%);
+      --buttonBorderReachDeckActive: 2px solid hsl(209, 100%, 19%);
+      --reachDeckEditorColor: hsl(112, 100%, 26%);
+      --launchpadButtonLight: hsl(210, 10%, 96%);
+      --launchpadButtonLightHover: hsl(220, 8%, 92%);
+      --launchpadButtonLightActive:hsl(0, 0%, 90%);
+      --ContrastPinkOrbitNoteHover: hsl(343, 81%, 48%);
+      --ContrastPinkOrbitNoteActive: hsl(345, 96%, 42%);
+      --ContrastButtonBorderPink: hsl(345, 96%, 42%);
+      --primaryColorClaroNavy: hsl(207, 74%, 27%);
+      --primaryColorClaroNavyHover: hsl(206, 83%, 21%);
+      --primaryColorClaroNavyActive: hsl(206, 89%, 17%);
+      --buttonBorderClaro: 2px solid hsl(207, 74%, 27%);
+      --buttonBorderClaroHover: 2px solid hsl(206, 83%, 21%);
+      --buttonBorderClaroActive: 2px solid hsl(206, 89%, 17%);
+      --primaryColorClaroBlue: hsl(201, 100%, 37%);
+      --primaryColorClaroBlueHover: hsl(201, 100%, 31%);
+      --primaryColorClaroBlueActive: hsl(201, 100%, 27%);
+      --claroDark: hsl(218, 54%, 20%);
+      --claroGrey: hsl(217, 31%, 68%);
+      --claroBlue: hsl(191, 88%, 40%);
+      --claroBlueAlt: hsl(188, 78%, 50%);
+      --claroGreen: hsl(75, 63%, 51%);
+      --altColor: var(--claroGreen);
+      --altColorHover: hsl(75, 70%, 40%);
+      --altColorActive: hsl(75, 77%, 33%);
+      --altButtonBorderColor: 2px solid var(--claroGreen);
+      --altButtonBorderColorHover: 2px solid hsl(75, 70%, 40%);
+      --altButtonBorderColorActive: 2px solid hsl(75, 77%, 33%);
+      --brandColorLingdys: hsl(0, 82%, 49%);
+      --primaryColorLingdys: hsl(217, 34%, 38%);
+      --primaryColorLingdysHover: hsl(217, 37%, 24%);
+      --primaryColorLingdysActive: hsl(217, 39%, 18%);
+      --buttonBorderLingdys: 2px solid hsl(217, 34%, 38%);
+      --buttonBorderLingdysHover: 2px solid hsl(217, 37%, 24%);
+      --buttonBorderLingdysActive: 2px solid hsl(217, 39%, 18%);
+      --brandColorAppWriter: #F70790;
+      --primaryColorAppWriter: #D8087F;
+      --primaryColorAppWriterHover:#B40669;
+      --primaryColorAppWriterActive: #9F055C;
+      --buttonBorderAppwriter: 2px solid #D8087F;
+      --buttonBorderAppwriterHover: 2px solid #B40669;
+      --buttonBorderAppWriterActive: 2px solid #9F055C;
+      --iconToggleFillOrbitNote: hsl(196, 99%, 50%);
+      --textColor: var( --th-slate-dark );
+      --textColorLight: var( --th-white );
+      --border: 1px solid var( --th-grey );
+      --borderDark: 1px solid var( --th-grey-dark );
+      --infoColor: hsl(194, 77%, 24%);
+      --successColor: hsla(134, 71%, 43%, 0.584);
+      --errorColor: hsl(0, 71%, 51%);
+      --warningColor: hsl(45, 97%, 51%);
+      --infoBackgroundColor: hsl(180, 100%, 99%);
+      --successBackgroundColor: hsl(78, 100%, 98%);
+      --errorBackgroundColor: hsl(0, 100%, 98%);
+      --warningBackgroundColor: hsl(35, 100%, 98%);
+      --notificationDarkModeBackground: hsl(218, 22%, 37%);
+      --infoBorderColor: hsl(191, 44%, 82%);
+      --successBorderColor: hsl(100, 28%, 69%);
+      --errorBorderColor: hsl(0, 37%, 73%);
+      --warningBorderColor: hsl(41, 30%, 71%);
+      --notificationDarkModeBorder: hsl(217, 19%, 41%);
+      --infoTitleColor: hsl(194, 77%, 24%);
+      --successTitleColor: hsl(121, 48%, 23%);
+      --errorTitleColor: hsl(1, 47%, 40%);
+      --warningTitleColor: hsl(37, 92%, 25%);
+      --infoWarningColor: hsl(194, 77%, 24%);
+      --successWarningColor: hsla(121, 48%, 23%, 0.8);
+      --errorWarningColor: hsla(1, 47%, 40%, 0.8);
+      --warningWarningColor: hsla(37, 92%, 25%, 0.8);
+      --line-height-base: 1.5;
+      --zindex-modal: 1050;
+      --modal-dialog-margin: 2rem;
+      --modal-content-border-radius: 1px;
+      --buttonBorderRadius: 30px;
+      --buttonRoundness: 30px;
+      --buttonLinkTextColor: var( --primaryColor)!important;
+      --buttonLinkIconColor: var( --primaryColor)!important;
+      --buttonNoBackgroundTextColor: var( --th-slate-dark);
+      --buttonNoBackgroundIconColor: var( --th-slate-dark);
+      --buttonNoBackgroundColor: transparent;
+      --buttonNoBackgroundColorHover: var(--icon-button-background-hover-color);
+      --buttonNoBackgroundColorActive: var(--icon-button-background-active-color);
+      --buttonNoBackgroundBorder: 2px solid transparent;
+      --buttonNoBackgroundBorderHover: 2px solid transparent;
+      --buttonNoBackgroundBorderActive: 2px solid transparent;
+      --activeDotColor: inherit;
+      --themeColorDefault: var(--defaultColor);
+      --themeColorGroundworks: var(--primaryColor);
+      --themeColorReadWrite: var(--primaryColorPurple);
+      --themeColorEquatio: var(--primaryColorBlue);
+      --themeColorBrowsealoud: var(--primaryColorOrange);
+      --themeColorWriq: var(--primaryColorTeal);
+      --themeColorFluencyTutor: var(--primaryColorGreen);
+      --themeColorSnapVerter: var(--primaryColorGreen);
+      --themeColorSpeechStream: var(--primaryColorPink);
+      --themeColorTexthelp: var(--primaryColorTeal);
+      --themeColorReachDeck: var(--primaryColorReachDeck);
+      --themeColorPdfReader: var(--primaryColorBlue);
+      --uniloginBackgroundColor: #F7F7F7;
+      --uniloginWindowBackgroundColor: var(--primaryColorBlue);
+      --line-height-base: 1.5;
+      --zindex-modal: 1050;
+      --modal-dialog-margin: 2em;
+      --modal-content-border-radius: 1px;
+      --modal-inner-padding: 1.5em;
+      --modal-title-padding: 1.5em;
+      --modal-title-line-height: var(--line-height-base);
+      --modal-content-bg: #fff;
+      --modal-content-border-color: rgba(0, 0, 0, .2);
+      --modal-content-fallback-border-color: #999;
+      --modal-backdrop-bg: #000;
+      --modal-backdrop-opacity: .5;
+      --modal-header-border-color: #e5e5e5;
+      --modal-footer-border-color: var(--modal-header-border-color);
+      --modal-header-background-color: #f5f5f5;
+      --select-border: 1px solid #DADADA;
+      --select-background: hsl(0, 0%, 100%);
+      --select-background-color: #efefef;
+      --select-background-color-hover: hsl(0, 0%, 97%);
+      --input-border: 1px solid #DADADA;
+      --input-background-color: #ffffff;
+      --settings-title-color: var(--primaryColor);
+      --settings-item-background-color: var(--th-white);
+      --settings-item-background-hover-color: var(--th-grey-medium);
+      --settings-item-background-active-color: var(--th-grey);
+      --list-group-background-color: transparent;
+      --list-group-item-background-color: var(--th-white);
+      --list-group-item-background-hover-color: var(--th-grey-light);
+      --list-group-item-background-active-color: var(--th-grey);
+      --list-group-item-icon-color: var(--th-slate-dark);
+      --ListGroupSearchItemColor: var(--th-white);
+      --ListGroupSearchItemColorHover: #f9fafb;
+      --ListGroupSearchItemTextColor: var(--th-slate);
+      --ListGroupSearchItemBorderColor: hsla(0, 0%, 0%, 0.15);
+      --ListGroupSearchItemAsideColor: hsl(0, 0%, 95%);
+      --ListGroupSearchItemAsideTextColor: #000;
+      --toolbar-button-disabled: hsl(0, 0%, 96.1%);
+      --toolbar-button-background: hsl(0, 0%, 96.1%);
+      --toolbar-button-hover-background: hsl(0, 0%, 80%);
+      --toolbar-button-color: hsl(0, 0%, 0%);
+      --toolbar-button-hover-active-background: hsl(0, 0%, 70.2%);
+      --toolbar-button-default-size: 43px;
+      --toolbar-button-focus-color: hsl(213, 71.3%, 60.4%);
+      --toolbar-button-svg-color: hsl(0, 0%, 29%);
+      --toolbar-button-toggle-color: hsl(264, 100%, 68%);
+      --panel-inner-padding: .7em;
+      --icon-button-background-default-color: hsla(0, 0%, 0%, 0.077);
+      --icon-button-background-hover-color: hsla(0, 0%, 0%, 0.125);
+      --icon-button-background-active-color: hsla(0, 0%, 0%, 0.187);
+      --icon-button-background-default-color-dark: rgba(255, 255, 255, 0.077);
+      --icon-button-background-hover-color-dark: rgba(255, 255, 255, 0.146);
+      --icon-button-background-active-color-dark: rgba(255, 255, 255, 0.221);
+      --icon-button-border-color: solid 2px transparent;
+      --menuIconFillColor: var(--th-slate);
+      --cardIconFillColor: var(--th-slate);
+      --default-menu-notify-background-colour: hsl(264, 100%, 68%);
+      --toolbarButtonBackgroundColor: var( --defaultColor);
+      --toolbarButtonBackgroundHoverColor: var( --icon-button-background-hover-color);
+      --toolbarButtonBackgroundActiveColor: var( --icon-button-background-active-color);
+      --toolbarIconHoverFill: var( --th-slate);
+      --toolbarIconToggleFill: var( --primaryColor);
+      --dashboardContentBackgroundColor: #fff;
+      --dashboardHeaderBackgroundColor: #fff;
+      --dashboardSidebarBorderTopColor: var( --lightGrey);
+      --dashboardTextColor: var(--th-slate);
+      --dashboardTitleTextColor: var(--fontColorDark);
+      --dashboardSubTitleTextColor: var(--th-slate-light);
+      --dashboardCardBackgroundColor: var(--white);
+      --dashboardCardBackgroundHoverColor: var(--th-grey-light);
+      --dashboardCardBackgroundActiveColor: var(--lightGrey);
+      --dashboardCardHighlightColor: var(--primaryColor);
+      --dashboardCardBorderColor: var(--lightGrey);
+      --dashboardCardFooterLinkColor: var(--primaryColor);
+      --dashboardCardAuditorColor: hsl(208, 100%, 43%);
+      --dashboardCardAuditorLabelColor: hsl(208, 100%, 43%);
+      --dashboardCardEditorLabelColor: var(--reachDeckEditorColor);
+      --dashboardCardToolbarColor: var(--primaryColorOrange);
+      --dashboardCardToolbarLabelColor: var(--primaryColorOrange);
+      --dashboardPaneBackgroundColor: #fcfcfc;
+      --dashboardPaneBorderColor: rgba(92, 106, 138, 0.4);
+      --dashboardPaneDashedBorderColor: var(--dashboardDashedBorderLight);
+      --dashboardDashedBorderLight: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%235C6A8ACC' stroke-width='2' stroke-dasharray='4%2c 8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+      --dashboardDashedBorderDark: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23323E52FF' stroke-width='2' stroke-dasharray='4%2c 8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+      --icon-opacity: 1;
+      --accordionBackgroundColor: #fff;
+      --accordionTextColor: #484848;
+      --accordionTextBottomColor: #484848;
+      --accordionIconColor: var(--toolbarWhite);
+      --accordionBackgroundColorHover: #f9fafb;
+      --tableBackgroundColor: none;
+      --tableBackgroundHeaderColor: #F9FAFB;
+      --tableBackgroundAltColor: #f7f7f7;
+      --tableBackgroundHoverColor: hsl(210, 20%, 98%);
+      --tableBorderColor: #E2E2E3;
+      --tableTextColor: #484848;
+    }
+    
+    /* stylelint-disable */
+    /* stylelint-enable */
+    .th-wq,
+    .th-th {
+      --toolbarBackgroundColor: var(--defaultColor);
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorWriq);
+      --themeColorSecondary: var(--secondaryColor);
+      --dashboardTopColor: var(--brandColorTeal);
+      --dashboardTitleColor: var(--themeColorWriq);
+      --iconFillColor: var(--white);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorTeal);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorTealHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorTealActive);
+      --primaryButtonBorderActive: var(--buttonBorderTealActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderTeal);
+      --primaryButtonBorderHover: var(--buttonBorderTealHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+    }
+    
+    .th-rw,
+    .th-wa {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorReadWrite);
+      --themeColorSecondary: var(--secondaryColor);
+      --toolbarBackgroundColor: var(--defaultColor);
+      --toolbarIconFill: var(--th-slate);
+      --toolbarIconHoverFill: var(--th-slate);
+      --toolbarIconActiveFill: var(--th-slate);
+      --toolbarIconToggledHoverFill: var(--primaryColorPurple);
+      --toolbarIconToggleFill: var(--primaryColorPurple);
+      --toolbarIconToggleHoverFill: var(--primaryColorPurple);
+      --dashboardTopColor: var(--brandColorPurple);
+      --dashboardTitleColor: var(--themeColorReadWrite);
+      --iconFillColor: var(--th-slate-dark);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderActive: var(--buttonBorderColorActive);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorPurple);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorPurpleHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorPurpleActive);
+      --primaryButtonBorderActive: var(--buttonBorderPurpleActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderPurple);
+      --primaryButtonBorderHover: var(--buttonBorderPurpleHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+      --menuNotifyBackgroundColour: var(--brandColorPurple);
+      --uniloginBackgroundColor: #FAF7FF;
+      --uniloginWindowBackgroundColor: var(--primaryColorPurple);
+    }
+    
+    .th-pr {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorPdfReader);
+      --themeColorSecondary: var(--secondaryColor);
+      --primaryButtonBackgroundColor: var(--primaryColorBlue);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorBlueHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorBlueActive);
+      --primaryButtonBorderActive: var(--buttonBorderBlueActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderBlue);
+      --primaryButtonBorderHover: var(--buttonBorderBlueHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --toolbarBackgroundColor: var(--th-grey);
+      --toolbarButtonBackgroundColor: var(--th-grey);
+      --toolbarButtonBackgroundHoverColor: var(--ContrastPinkOrbitNoteHover);
+      --toolbarButtonBackgroundActiveColor: var(--ContrastPinkOrbitNoteActive);
+      --toolbarButtonBorderActive: var(--ContrastButtonBorderPink);
+      --toolbarIconFill: var(--th-slate);
+      --toolbarIconHoverFill: var(--white);
+      --toolbarIconActiveFill: var(--white);
+      --toolbarIconToggleFill: var(--ContrastPinkOrbitNoteActive);
+      --toolbarIconToggleHoverFill: var(--white);
+      --toolbarIconToggledHoverFill: var(--white);
+      --iconButtonBackgroundDefaultColor: var(--icon-button-background-default-color);
+      --iconButtonBackgroundHoverColor: var(--icon-button-background-hover-color);
+      --iconButtonBackgroundActiveColor: var(--icon-button-background-active-color);
+      --iconButtonBorderColor: 2px solid transparent;
+      --iconFillColor: var(--th-slate);
+      --panelBackgroundColor: var(--th-grey-light);
+      --panelBackgroundColorLight: var(--white);
+      --panelBackgroundColorDark: var(--th-grey);
+      --fontColor: var(--th-slate-dark);
+      --borderColor: 1px solid var(--th-grey-dark);
+      --settingsTitleColor: var(--themeColorPrimary);
+      --menuNotifyBackgroundColour: var(--brandColorPink);
+      --dashboardTopColor: var(--primaryColorBlue);
+      --dashboardTitleColor: var(--themeColorEquatio);
+      --cardIconFillColor: var(--primaryColorBlue);
+    }
+    
+    .th-eq {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorEquatio);
+      --themeColorSecondary: var(--secondaryColor);
+      --dashboardTopColor: var(--brandColorBlue);
+      --dashboardTitleColor: var(--themeColorEquatio);
+      --iconFillColor: var(--th-slate-dark);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorBlue);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorBlueHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorBlueActive);
+      --primaryButtonBorderActive: var(--buttonBorderBlueActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderBlue);
+      --primaryButtonBorderHover: var(--buttonBorderBlueHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+      --uniloginBackgroundColor: #F2F9FF;
+      --uniloginWindowBackgroundColor: var(--brandColorBlueWCAG);
+    }
+    
+    .th-ba {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorBrowsealoud);
+      --themeColorSecondary: var(--secondaryColor);
+      --toolbarBackgroundColor: var(--th-grey);
+      --toolbarIconButtonFillColor: var(--th-slate);
+      --toolbarButtonBackgroundColor: var(--th-grey);
+      --toolbarButtonBackgroundHoverColor: var(--primaryColorOrangeHover);
+      --toolbarButtonBackgroundActiveColor: var(--primaryColorOrangeActive);
+      --toolbarButtonBorderActive: var(--buttonBorderOrange);
+      --toolbarIconFill: var(--th-slate);
+      --toolbarIconHoverFill: var(--th-slate);
+      --toolbarIconActiveFill: var(--primaryColorBlue);
+      --toolbarIconToggleFill: var(--primaryColorBlue);
+      --toolbarIconToggleHoverFill: var(--white);
+      --dashboardTopColor: var(--brandColorOrange);
+      --dashboardTitleColor: var(--themeColorBrowsealoud);
+      --iconFillColor: var(--white);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorOrange);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorOrangeHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorOrangeActive);
+      --primaryButtonBorderActive: var(--buttonBorderOrangeActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderOrange);
+      --primaryButtonBorderHover: var(--buttonBorderOrangeHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+      --menuNotifyBackgroundColour: var(--white);
+    }
+    .th-ba .gw-menu-notification--inline {
+      --menuNotifyBackgroundColour: var(--themeColorBrowsealoud);
+    }
+    
+    .th-at {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorReachDeck);
+      --themeColorSecondary: var(--secondaryColor);
+      --toolbarBackgroundColor: var(--defaultColor);
+      --toolbarIconFill: var(--th-slate);
+      --toolbarIconHoverFill: var(--th-slate);
+      --toolbarIconActiveFill: var(--th-slate);
+      --toolbarIconToggledHoverFill: var(--primaryColorBlue);
+      --toolbarIconToggleFill: var(--primaryColorBlue);
+      --toolbarIconToggleHoverFill: var(--primaryColorBlue);
+      --dashboardTopColor: var(--th-grey);
+      --dashboardTitleColor: var(--th-slate-dark);
+      --iconFillColor: var(--th-slate-dark);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorReachDeck);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorReachDeckHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorReachDeckActive);
+      --primaryButtonBorderActive: var(--buttonBorderReachDeckActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderReachDeck);
+      --primaryButtonBorderHover: var(--buttonBorderReachDeckHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --dashboardTopColor: #E12362;
+      --dashboardContentBackgroundColor: #F2F5F9;
+      --tableBackgroundHeaderColor: #DFE1E5;
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+    }
+    
+    .th-rd {
+      font-size: 10px;
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorReachDeck);
+      --themeColorSecondary: var(--secondaryColor);
+      --toolbarBackgroundColor: var(--defaultColor);
+      --toolbarIconFill: var(--th-slate);
+      --toolbarIconHoverFill: var(--th-slate);
+      --toolbarIconActiveFill: var(--th-slate);
+      --toolbarIconToggledHoverFill: var(--primaryColorBlue);
+      --toolbarIconToggleFill: var(--primaryColorBlue);
+      --toolbarIconToggleHoverFill: var(--primaryColorBlue);
+      --dashboardTopColor: var(--th-grey);
+      --dashboardTitleColor: var(--th-slate-dark);
+      --iconFillColor: var(--th-slate-dark);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorReachDeck);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorReachDeckHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorReachDeckActive);
+      --primaryButtonBorderActive: var(--buttonBorderReachDeckActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderReachDeck);
+      --primaryButtonBorderHover: var(--buttonBorderReachDeckHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+    }
+    
+    .th-ss {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorSpeechStream);
+      --themeColorSecondary: var(--secondaryColor);
+      --dashboardTopColor: var(--brandColorPink);
+      --dashboardTitleColor: var(--themeColorSpeechStream);
+      --iconFillColor: var(--th-slate-dark);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--themeColorSpeechStream);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorPinkHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorPinkActive);
+      --primaryButtonBorderActive: var(--buttonBorderPinkActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderPink);
+      --primaryButtonBorderHover: var(--buttonBorderPinkHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+    }
+    
+    .th-st {
+      --uniloginBackgroundColor: #F2F9FF;
+      --uniloginWindowBackgroundColor: #2A3953;
+    }
+    
+    .th-sv,
+    .th-ft {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--themeColorFluencyTutor);
+      --themeColorSecondary: var(--secondaryColor);
+      --dashboardTopColor: var(--brandColorGreen);
+      --dashboardTitleColor: var(--themeColorFluencyTutor);
+      --iconFillColor: var(--th-slate-dark);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--themeColorFluencyTutor);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorGreenHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorGreenActive);
+      --primaryButtonBorderActive: var(--buttonBorderGreenActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderGreen);
+      --primaryButtonBorderHover: var(--buttonBorderGreenHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --secondaryButtonBackgroundColor: var(--secondaryColor);
+      --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+      --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+      --secondaryButtonTextColor: var(--fontColorWhite);
+      --secondaryButtonTextHoverColor: var(--fontColorWhite);
+      --secondaryButtonTextActiveColor: var(--fontColorWhite);
+      --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+      --secondaryButtonBorder: var(--secondaryButtonBorder);
+      --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+      --secondaryButtonBorderRadius: var(--buttonRoundness);
+      --secondaryButtonIconFillColor: var(--white);
+      --table-hover-item: var(--list-item-light-hover);
+      --settingsTitleColor: var(--themeColorPrimary);
+    }
+    
+    .th-cr {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--primaryColorClaroNavy);
+      --themeColorSecondary: var(--secondaryColor);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorClaroNavy);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorClaroNavyHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorClaroNavyActive);
+      --primaryButtonBorderActive: var(--buttonBorderClaroActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderClaro);
+      --primaryButtonBorderHover: var(--buttonBorderClaroHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --altButtonBackgroundColor: var(--altColor);
+      --altButtonBackgroundHoverColor: var(--altColorHover);
+      --altButtonBackgroundActiveColor: var(--altColorActive);
+      --altButtonTextColor: var(--fontColorWhite);
+      --altButtonTextHoverColor: var(--fontColorWhite);
+      --altButtonTextActiveColor: var(--fontColorWhite);
+      --altButtonTextVisitedColor: var(--fontColorWhite);
+      --altButtonBorder: var(--altButtonBorder);
+      --altButtonBorderHover: var(--altButtonBorderColorHover);
+      --altButtonBorderRadius: var(--buttonRoundness);
+      --altButtonIconFillColor: var(--white);
+      --uniloginBackgroundColor: #F2F9FF;
+      --uniloginWindowBackgroundColor: var(--themeColorPrimary);
+    }
+    
+    .th-wh {
+      background: #F6F6F6;
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--primaryColorClaroNavy);
+      --themeColorSecondary: var(--secondaryColor);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorClaroBlue);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorClaroBlueHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorClaroBlueActive);
+      --primaryButtonBorderActive: var(--buttonBorderClaroActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--primaryColorClaroBlue);
+      --primaryButtonBorderHover: var(--primaryColorClaroBlueHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --altButtonBackgroundColor: var(--altColor);
+      --altButtonBackgroundHoverColor: var(--altColorHover);
+      --altButtonBackgroundActiveColor: var(--altColorActive);
+      --altButtonTextColor: var(--fontColorWhite);
+      --altButtonTextHoverColor: var(--fontColorWhite);
+      --altButtonTextActiveColor: var(--fontColorWhite);
+      --altButtonTextVisitedColor: var(--fontColorWhite);
+      --altButtonBorder: var(--altButtonBorder);
+      --altButtonBorderHover: var(--altButtonBorderColorHover);
+      --altButtonBorderRadius: var(--buttonRoundness);
+      --altButtonIconFillColor: var(--white);
+      --uniloginBackgroundColor: #F2F9FF;
+      --uniloginWindowBackgroundColor: var(--primaryColorClaroNavy);
+    }
+    
+    .th-lds {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--primaryColorLingdys);
+      --themeColorSecondary: var(--secondaryColor);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorLingdys);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorLingdysHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorLingdysActive);
+      --primaryButtonBorderActive: var(--buttonBorderLingdysActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderLingdys);
+      --primaryButtonBorderHover: var(--buttonBorderLingdysHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --altButtonBackgroundColor: var(--altColor);
+      --altButtonBackgroundHoverColor: var(--altColorHover);
+      --altButtonBackgroundActiveColor: var(--altColorActive);
+      --altButtonTextColor: var(--fontColorWhite);
+      --altButtonTextHoverColor: var(--fontColorWhite);
+      --altButtonTextActiveColor: var(--fontColorWhite);
+      --altButtonTextVisitedColor: var(--fontColorWhite);
+      --altButtonBorder: var(--altButtonBorder);
+      --altButtonBorderHover: var(--altButtonBorderColorHover);
+      --altButtonBorderRadius: var(--buttonRoundness);
+      --altButtonIconFillColor: var(--white);
+      --uniloginBackgroundColor: #F2F9FF;
+      --uniloginWindowBackgroundColor: var(--themeColorPrimary);
+    }
+    
+    .th-aw {
+      --themeColorDefault: var(--defaultColor);
+      --themeColorPrimary: var(--primaryColorClaroNavy);
+      --themeColorSecondary: var(--secondaryColor);
+      --buttonBackgroundColor: var(--defaultColor);
+      --buttonBackgroundHoverColor: var(--defaultColorHover);
+      --buttonBackgroundActiveColor: var(--defaultColorActive);
+      --buttonTextColor: var(--fontColorDark);
+      --buttonTextHoverColor: var(--fontColorDark);
+      --buttonTextActiveColor: var(--fontColorDark);
+      --buttonTextVisitedColor: var(--fontColorDark);
+      --buttonBorder: var(--buttonBorder);
+      --buttonBorderHover: var(--buttonBorderColorHover);
+      --buttonBorderRadius: var(--buttonRoundness);
+      --buttonBorderIconFillColor: var(--black);
+      --primaryButtonBackgroundColor: var(--primaryColorAppWriter);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorAppWriterHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorAppWriterActive);
+      --primaryButtonBorderActive: var(--buttonBorderAppWriterActive);
+      --primaryButtonTextColor: var(--fontColorWhite);
+      --primaryButtonTextHoverColor: var(--fontColorWhite);
+      --primaryButtonTextActiveColor: var(--fontColorWhite);
+      --primaryButtonTextVisitedColor: var(--fontColorWhite);
+      --primaryButtonBorder: var(--buttonBorderAppWriter);
+      --primaryButtonBorderHover: var(--buttonBorderAppWriterHover);
+      --primaryButtonBorderRadius: var(--buttonRoundness);
+      --primaryButtonIconFillColor: var(--white);
+      --altButtonBackgroundColor: var(--altColor);
+      --altButtonBackgroundHoverColor: var(--altColorHover);
+      --altButtonBackgroundActiveColor: var(--altColorActive);
+      --altButtonTextColor: var(--fontColorWhite);
+      --altButtonTextHoverColor: var(--fontColorWhite);
+      --altButtonTextActiveColor: var(--fontColorWhite);
+      --altButtonTextVisitedColor: var(--fontColorWhite);
+      --altButtonBorder: var(--altButtonBorder);
+      --altButtonBorderHover: var(--altButtonBorderColorHover);
+      --altButtonBorderRadius: var(--buttonRoundness);
+      --altButtonIconFillColor: var(--white);
+      --uniloginBackgroundColor: #F7F7F7;
+      --uniloginWindowBackgroundColor: var(--primaryColorAppWriter);
+    }
+    
+    .dark-mode {
+      --toolbarBackgroundColor: var(--th-slate-dark);
+      --toolbarButtonBackgroundColor: var(--th-slate-dark);
+      --toolbarButtonBackgroundHoverColor: var(--icon-button-background-hover-color-dark);
+      --toolbarButtonBackgroundActiveColor: var(--icon-button-background-active-color-dark);
+      --toolbarButtonBorderActive: var(--buttonBorderPink);
+      --toolbarIconFill: var(--white);
+      --toolbarIconHoverFill: var(--white);
+      --toolbarIconActiveFill: var(--white);
+      --dashboardHeaderBackgroundColor: var(--th-slate-dark);
+      --dashboardSidebarBorderTopColor: var(--th-slate);
+      --dashboardSidebarBackgroundColor: var(--th-slate-dark);
+      --dashboardContentBackgroundColor: var(--th-slate);
+      --dashboardCardBackgroundColor: var(--th-slate-dark);
+      --dashboardCardBackgroundHoverColor: var(--th-slate-dark-hover600);
+      --dashboardCardBackgroundActiveColor: var(--th-slate-dark-active600);
+      --dashboardCardHighlightColor: var(--brandColorBlue);
+      --dashboardTextColor: var(--th-white);
+      --dashboardTitleTextColor: var(--th-white);
+      --dashboardSubTitleTextColor: var(--th-white);
+      --menuIconFillColor: var(--white);
+      --iconButtonBackgroundDefaultColor: var(--icon-button-background-default-color-dark);
+      --iconButtonBackgroundHoverColor: var(--icon-button-background-hover-color-dark);
+      --iconButtonBackgroundActiveColor: var(--icon-button-background-active-color-dark);
+      --iconButtonBorderColor: 2px solid transparent;
+      --iconFillColor: var(--white);
+      --buttonLinkTextColor: var(--white);
+      --buttonLinkIconColor: var(--white);
+      --buttonNoBackgroundTextColor: var(--white);
+      --buttonNoBackgroundIconColor: var(--white);
+      --buttonNoBackgroundColor: transparent;
+      --buttonNoBackgroundColorHover: var(--icon-button-background-hover-color-dark);
+      --buttonNoBackgroundColorActive: var(--icon-button-background-active-color-dark);
+      --buttonNoBackgroundBorder: 2px solid transparent;
+      --buttonNoBackgroundBorderHover: 2px solid transparent;
+      --buttonNoBackgroundBorderActive: 2px solid transparent;
+      --panelBackgroundColor: var(--th-slate);
+      --panelBackgroundColorLight: var(--th-slate-light);
+      --panelBackgroundColorDark: var(--th-slate-dark);
+      --fontColor: var(--textColorLight);
+      --borderColor: 1px solid var(--th-slate-light);
+      --infoBackgroundColor: var(--notificationDarkModeBackground);
+      --successBackgroundColor: var(--notificationDarkModeBackground);
+      --errorBackgroundColor: var(--notificationDarkModeBackground);
+      --warningBackgroundColor: var(--notificationDarkModeBackground);
+      --infoBorderColor: var(--notificationDarkModeBorder);
+      --successBorderColor: var(--notificationDarkModeBorder);
+      --errorBorderColor: var(--notificationDarkModeBorder);
+      --warningBorderColor: var(--notificationDarkModeBorder);
+      --infoWarningColor: #fff;
+      --successWarningColor: #fff;
+      --errorWarningColor: #fff;
+      --warningWarningColor: #fff;
+      --infoTitleColor: #fff;
+      --successTitleColor: #fff;
+      --errorTitleColor: #fff;
+      --warningTitleColor: #fff;
+      --accordionBackgroundColor: var(--th-slate-dark);
+      --accordionTextColor: #fff;
+      --accordionTextBottomColor: #f5f5f5;
+      --accordionIconColor: var(--toolbarWhite);
+      --accordionBackgroundColorHover: var(--th-slate-dark-hover600);
+      --tableBackgroundColor: var(--th-slate);
+      --tableBackgroundHeaderColor: var(--th-slate-alt);
+      --tableBackgroundAltColor: var(--th-slate-alt);
+      --tableBackgroundHoverColor: var(--th-slate-hover);
+      --tableBorderColor: var(--th-slate-dark);
+      --tableTextColor: #fff;
+      --ListGroupSearchItemColor: var(--th-slate-dark);
+      --ListGroupSearchItemColorHover: var(--th-slate-dark-hover800);
+      --ListGroupSearchItemTextColor: var(--th-white);
+      --ListGroupSearchItemBorderColor:rgba(0, 0, 0, 0.225);
+      --ListGroupSearchItemAsideColor: var(--th-slate-dark);
+      --ListGroupSearchItemAsideTextColor: #fff;
+    }
+    .dark-mode.th-rw {
+      --toolbarIconActiveFill: var(--white);
+      --toolbarIconToggledHoverFill: var(--brandColorPurple);
+      --toolbarIconToggleFill: var(--brandColorPurple);
+      --toolbarIconToggleHoverFill: var(--brandColorPurple);
+    }
+    .dark-mode.th-pr {
+      --toolbarButtonBackgroundHoverColor: var(--primaryColorBlue);
+      --toolbarButtonBackgroundActiveColor: var(--primaryColorBlueHover);
+      --toolbarButtonBorderActive: var(--buttonBorderBlueActive);
+      --toolbarIconToggleFill: var(--iconToggleFillOrbitNote);
+      --textColor: var(--textColorLight);
+      --cardIconFillColor: var(--brandColorBlue);
+      --primaryButtonBackgroundColor: var(--primaryColor);
+      --primaryButtonBackgroundHoverColor: var(--primaryColorHover);
+      --primaryButtonBackgroundActiveColor: var(--primaryColorActive);
+      --primaryButtonBorderActive: var(--primaryButtonBorderActive);
+      --primaryButtonBorder: var(--primaryButtonBorder);
+      --primaryButtonBorderHover: var(--primaryButtonBorderHover);
+      --dashboardTopColor: var(--primaryColorBlue);
+      --dashboardTitleColor: var(--themeColorEquatio);
+      --dashboardPaneBackgroundColor: var(--th-slate-dark);
+      --dashboardPaneBorderColor: var(--th-slate-dark);
+      --dashboardPaneDashedBorderColor: var(--dashboardDashedBorderDark);
+      --listGroupItemBackgroundColor: var(--th-slate-dark);
+      --listGroupItemBackgroundColorHover: var(--th-slate-dark-hover800);
+      --listGroupItemBackgroundColorActive: var(--th-slate-dark-active800);
+      --listGroupTileBackgroundColorActive: var(--th-slate-dark-active800);
+      --list-item-hover: var(--listGroupItemBackgroundColorHover);
+    }
+    .dark-mode.th-rd {
+      --toolbarIconToggledHoverFill: var(--brandColorBlue);
+      --toolbarIconToggleFill: var(--brandColorBlue);
+      --toolbarIconToggleHoverFill: var(--brandColorBlue);
+      --dashboardTopColor: var(--th-slate);
+      --dashboardCardAuditorColor: var(--primaryColorBlue);
+      --dashboardCardAuditorLabelColor: var(--th-grey);
+      --dashboardCardEditorColor: var(--reachDeckEditorColor);
+      --dashboardCardEditorLabelColor: var(--th-grey);
+      --dashboardCardToolbarColor: var(--primaryColorOrange);
+      --dashboardCardToolbarLabelColor: var(--th-grey);
+      --dashboardCardBorderColor: var(--th-slate-light);
+      --dashboardCardFooterLinkColor: hsl(197, 100%, 50%);
+      --icon-opacity: .9;
+      --cardIconFillColor: var(--th-white);
+      --listGroupItemBackgroundColor: var(--th-slate-dark);
+      --listGroupItemBackgroundColorHover: var(--th-slate-dark-hover800);
+      --listGroupItemBackgroundColorActive: var(--th-slate-dark-active800);
+      --listGroupTileBackgroundColorActive: var(--th-slate-dark-active800);
+      --list-item-hover: var(--listGroupItemBackgroundColorHover);
+    }
+    .dark-mode {
+      --inputBorder: 1px solid var(--th-slate);
+      --inputTextColor: var( --th-white);
+      --inputBackgroundColor: var(--th-cool-grey-800);
+      --modalHeaderBackgroundColor: var(--th-cool-grey-800);
+      --modalContentBackgroundColor: var(--th-cool-grey-700);
+      --modalContentBorderColorHeader: var(--th-cool-grey-700);
+      --modalContentBorderColorFooter: var(--th-cool-grey-700);
+      --modalTextColor: var(--th-white);
+      --settingsDialogBackgroundColor: var(--th-cool-grey-700);
+      --settingsDialogMenuBackgroundColor: var(--th-cool-grey-800);
+      --settingsDialogItemSelectedBackgroundColor: var(--th-slate-dark);
+      --settingsDialogItemBackgroundColorHover: var(--th-cool-grey-700);
+      --settingsDialogItemBackgroundColorActive: var(--th-cool-grey-600);
+      --settingsTitleColor: #fff;
+      --selectBorder: 1px solid var( --slate-light);
+      --selectBackgroundColor: var( --th-slate);
+      --selectBackgroundColorHover: rgba(255, 255, 255, 0.146);
+      --selectBackgroundColorActive: rgba(255, 255, 255, 0.221);
+    }
+    .dark-mode .gw-select {
+      background: transparent url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' height='22px' width='22px' viewBox='0 0 18 18'>%3Cpath d='M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z' fill='%23fff'/%3E%3Cpath d='M0-.75h24v24H0z' fill='none'/%3E</svg>") no-repeat;
+      background-repeat: no-repeat, repeat;
+      background-position: right 0.9em top 40%, 0 0;
+      background-color: #434e65 transparent;
+      border: 1px solid #fff;
+      background-size: 1.3em auto, 100%;
+      color: #fff;
+    }
+    .dark-mode .gw-select > option {
+      background: #434e65;
+    }
+    .dark-mode {
+      --listGroupBackgroundColor: transparent;
+      --listGroupItemTextColor: var(--th-white);
+      --listGroupItemBackgroundColor: var(--th-cool-grey-800);
+      --listGroupItemActionsBackgroundColor: var(--th-cool-grey-850);
+      --listGroupItemBackgroundColorHover: var(--th-cool-grey-700);
+      --listGroupItemBackgroundColorActive: var(--th-cool-grey-600);
+      --listGroupItemIconColor: var(--th-white);
+      --listGroupItemArrowColor: var(--th-cool-grey-800);
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      :root .day.dark-scheme {
+        background: #333;
+        color: white;
+      }
+      :root .night.dark-scheme {
+        background: black;
+        color: #ddd;
+      }
+    }
+    @media (prefers-color-scheme: light) {
+      :root .day.light-scheme {
+        background: white;
+        color: #555;
+      }
+      :root .night.light-scheme {
+        background: #eee;
+        color: black;
+      }
+    }.th-rw {
+      --listGroupItemBackgroundColorActive: white;
+      --squareButtonBackgroundHover: #f5f5f5;
+      --squareButtonIconFillColor: rgb(36, 42, 56);
+      --squareButtonActiveBackGroundColor: #EFEFEF;
+      --squareButtonIconTickColor: #506C7E ;
+    }
+    
+    .dark-mode {
+      --listGroupItemBackgroundColorFocus: rgb(63, 79, 90);
+      --modalTextColorFocus: white;
+      --listGroupItemBackgroundColorActive: rgb(36, 45, 51);
+      --modalTextColorActive: white;
+      --squareButtonBackgroundHover: rgb(56, 71, 81);
+      --squareButtonIconFillColor: white;
+      --squareButtonActiveBackGroundColor: #24323E;
+      --squareButtonIconTickColor: #FFF ;
+    }
+    
+    .dark-mode.th-rw {
+      --toolbarIconButtonFillColor: var(--white);
+    }
+    
+    .gw-toolbar--s1 {
+      --fontSize: 5px;
+    }
+    
+    .gw-toolbar--s2 {
+      --fontSize: 10px;
+    }
+    
+    .gw-toolbar--s3 {
+      --fontSize: 15px;
+    }
+    
+    .gw-toolbar--s4 {
+      --fontSize: 20px;
+    }
+    
+    .gw-listitem-fontsize-s10 {
+      --gw-listitem-fontsize: 10px !important;
+    }
+    
+    .gw-listitem-fontsize-s11 {
+      --gw-listitem-fontsize: 11px !important;
+    }
+    
+    .gw-listitem-fontsize-s12 {
+      --gw-listitem-fontsize: 12px !important;
+    }
+    
+    .gw-listitem-fontsize-s13 {
+      --gw-listitem-fontsize: 13px !important;
+    }
+    
+    .gw-listitem-fontsize-s14 {
+      --gw-listitem-fontsize: 14px !important;
+    }
+    
+    .gw-listitem-fontsize-s15 {
+      --gw-listitem-fontsize: 15px !important;
+    }
+    
+    .gw-listitem-fontsize-s16 {
+      --gw-listitem-fontsize: 16px !important;
+    }
+    
+    .gw-listitem-fontsize-s17 {
+      --gw-listitem-fontsize: 17px !important;
+    }
+    
+    .gw-listitem-fontsize-s18 {
+      --gw-listitem-fontsize: 18px !important;
+    }
+    
+    .gw-listitem-fontsize-s19 {
+      --gw-listitem-fontsize: 19px !important;
+    }
+    
+    .gw-listitem-fontsize-s20 {
+      --gw-listitem-fontsize: 20px !important;
+    }
+    
+    .gw-listitem-fontsize-s21 {
+      --gw-listitem-fontsize: 21px !important;
+    }
+    
+    .gw-listitem-fontsize-s22 {
+      --gw-listitem-fontsize: 22px !important;
+    }
+    
+    .gw-listitem-fontsize-s23 {
+      --gw-listitem-fontsize: 23px !important;
+    }
+    
+    .gw-listitem-fontsize-s24 {
+      --gw-listitem-fontsize: 24px !important;
+    }
+    
+    :root {
+      --fontSize: 10px;
+    }
+    
+    .gw-info {
+      --notification-bg-color: var(--infoBackgroundColor);
+      --notification-border-color: var(--infoBorderColor);
+      --notification-color: var(--infoTitleColor);
+    }
+    
+    .gw-success {
+      --notification-bg-color: var(--successBackgroundColor);
+      --notification-border-color: var(--successBorderColor);
+      --notification-color: var(--successTitleColor);
+    }
+    
+    .gw-error {
+      --notification-bg-color: var(--errorBackgroundColor);
+      --notification-border-color: var(--errorBorderColor);
+      --notification-color: var(--errorTitleColor);
+    }
+    
+    .gw-warning {
+      --notification-bg-color: var(--warningBackgroundColor);
+      --notification-border-color: var(--warningBorderColor);
+      --notification-color: var(--warningTitleColor);
+    }
+    
+    .th-rw {
+      --toolbarIconToggleFill: var(--primaryColorPurple);
+      --toolbarIconToggleHoverFill: var(--primaryColorPurple);
+    }
+    
+    .gw-toolbar--undocked {
+      --toolbarWidth: fit-content;
+      --toolbarDisplay: block;
+      --toolbarPosition: fixed;
+    }
+    
+    .gw-ul--small {
+      --liWidth: 150px;
+    }
+    
+    .gw-ul--medium {
+      --liWidth: 300px;
+    }
+    
+    .gw-ul--large {
+      --liWidth: 450px;
+    }
+    
+    gw-radio label.gw-radio__input-label b {
+      font-weight: var(--label-bold-font-weight, bold);
+      font-size: var(--label-bold-font-size, 1.4em);
+      font-family: var(--label-bold-font-family, "Open Sans", sans-serif);
+      color: var(--label-bold-color, inherit);
+    }
+    
+    gw-radio label.gw-radio__input-label u {
+      text-decoration: underline;
+      font-size: 1em; /* Inherit from parent label (1.2em) */
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body style="padding-top: 40px;">
+  <header class="netflix-header">
+    <div class="netflix-logo">NETFLIX</div>
+    <nav class="netflix-nav"><a href="#">Home</a><a href="#">TV Shows</a><a href="#">Movies</a><a href="#">New &amp;
+        Popular</a><a href="#">My List</a></nav>
+  </header><!-- Hero Banner - Netflix Style -->
+  <section class="hero-banner"><img src="WhatsApp Image 2026-03-09 at 18.18.39.jpeg" alt="Gilmore Girls Cover"
+      class="hero-image" />
+    <div class="hero-gradient-left"></div>
+    <div class="hero-gradient-bottom"></div>
+    <div class="hero-content">
+      <div class="show-logo">
+        <h1 class="show-title">GILMORE GIRLS</h1>
+      </div>
+      <div class="show-meta"><span class="netflix-badge">N</span><span>2026</span><span>TV-14</span><span
+          class="hd-badge">HD</span><span>21 Seasons</span></div>
+      <div class="birthday-message">
+        <p>Happy 21st birthday Bear! I'm glad you didn't go to Yale because I wouldn't have met you.</p>
+        <p class="signature">With love, from Diego ☕</p>
+      </div>
+      <p class="show-description">Follow the heartwarming journey of a young lady in the charming town of Stars
+        Hollow(Lowkey Stellies right?). She is filled with witty banter, endless coffee, and holds unforgettable cringe
+        moments  -  this special birthday edition
+        celebrates 21 years of everyone's favorite ... Gundo Jade Tshiambwa (or is it Judy??).
+      </p>
+      <div class="button-row"><button class="netflix-btn btn-play"><span class="btn-icon">▶</span>
+          Play
+        </button><button class="netflix-btn btn-info"><span class="btn-icon">ⓘ</span>
+          More Info
+        </button></div>
+      <div id="playingIndicator" class="playing-indicator"><span><audio src="TheLaThereSheGoes.mp3" controls></audio>
+🎵 Now Playing: There She Goes - The La's</span></div>
+    </div>
+  </section><!-- More Info Section -->
+  <section class="more-info">
+    <div class="info-grid">
+      <div class="about-section">
+        <h3>About Gundo Jade Tshiambwa: A Gilmore "Girl", She Is Just A Girl - by D.N</h3>
+        <p><b><i>Hey Love, i am about to go off script here and i just want to thank you first and foremost. For being
+              the
+              amazing, special and weird person that you are. You know sometimes words escape when i have to describe
+              you
+              because there is just something about you sarn and i may not have the words but it is in the way i look at
+              you, it tells it all.<br /><br />It is in seasons like the one i am currently in where i am reminded of
+              how
+              intentional God really is and you serve as that reminder. I mean look at you dude!! Your are so beautiful,
+              inside and out, you embody love and grace. You are my biggest supporter and cheerleader. You alone make me
+              feel like i'm on-top of the world, like i am capable of anything and everything. You just know what to say
+              and
+              when to say it, what to do and when to do it. You always look to fill people's cups or see if they have
+              enough even when yours seems to be getting lesser but i guess it is because you know that His grace is sufficient
+              enough to fill yours too, and that is just a summary of what kind of person you are.<br /><br />Dude i
+              have
+              known you since you were 17!!! and now you are 21!!! That is actually insane. I guess in a way, we are
+              getting old together (wish i could insert an emoji right here lol). I am just so proud of the woman you
+              are
+              becoming, a woman of valour, a woman i am proud to stand with and celebrate. I wish you could see yourself
+              from my eyes, you have come so far dude. I pray that in the coming season you start giving yourself a tap
+              on
+              the back and celebrate the things you achieve/accomplish without feeling no need to or like they are the
+              "bare minimum". You work so hard and yes i know that it is God that makes it all possible, that he gave
+              you
+              the resilience and strength to get those things but at the same time you obeyed and remained disciplined,
+              so
+              in the midst of those wins, thank God, give Him all the glory (as you should) but also look back at what you went through to get that
+              win
+              and tell yourself "You did that!!" because you did. I know you still have a long way to go but you have
+              also
+              come so far and i know God is proud, your parents are proud and you should be too.<br /><br />You know
+              what
+              i have clocked? You are getting finer by the minute ;) ... keep it up!!!<br /><br /></i></b></p>
+      </div>
+      <div class="details-section">
+        <p><strong>Cast:</strong> The main Character Herself , Starring Sa Gona ... Gundo Jade Tshiambwa (soon to be Dr
+          in
+          the next coming seasons, stay tuned ...)</p>
+        <p><strong>Genres:</strong> Dramatic all day, everyday(love it!!); Funny (thought i was going to say looking?
+          Lol
+          nah she tries shem); </p>
+        <p><strong>Special Occasion:</strong> Bear's 21st Birthday 🎂</p>
+        <p><strong>Mood:</strong> Cozy, Heartwarming, Nostalgic</p>
+        <p><strong>Recommended Pairing:</strong> Pizza, Coffee, and Movie Nights</p>
+      </div>
+    </div>
+  </section><!-- Episodes Section -->
+  <section class="episodes-section">
+    <div class="section-header">
+      <h2 class="section-title">Episodes | Bear's Birthday Marathon</h2><select class="season-dropdown">
+        <option>Season 1: The Early Years</option>
+        <option>Season 2: Chilton Days</option>
+        <option>Season 3: College Decisions</option>
+      </select>
+    </div>
+    <div class="episodes-grid">
+      <div class="episode-card">
+        <div class="episode-thumb"><img src="WhatsApp Image 2026-03-09 at 18.09.14.jpeg" alt="Episode 1" /><span
+            class="episode-number">Episode 1</span><span class="episode-runtime">42m</span></div>
+        <div class="episode-info">
+          <h4 class="episode-title">Dad and Mom's little girl</h4>
+          <p class="episode-desc">Where it all began. The perfect episode to start Bear's birthday marathon. Coffee at
+            Luke's included.</p>
+        </div>
+      </div>
+      <div class="episode-card">
+        <div class="episode-thumb"><img src="WhatsApp Image 2026-03-09 at 18.10.23.jpeg" alt="Episode 2" /><span
+            class="episode-number">Episode 2</span><span class="episode-runtime">44m</span></div>
+        <div class="episode-info">
+          <h4 class="episode-title">The Big Sis</h4>
+          <p class="episode-desc">The one who looks out for everyone. A heartwarming episode full of sibling love and
+            adventures.</p>
+        </div>
+      </div>
+      <div class="episode-card">
+        <div class="episode-thumb"><img src="WhatsApp Image 2026-03-09 at 18.17.59.jpeg" alt="Episode 3" /><span
+            class="episode-number">Episode 3</span><span class="episode-runtime">41m</span></div>
+        <div class="episode-info">
+          <h4 class="episode-title">One Of The 2 Love-Birds</h4>
+          <p class="episode-desc">A romantic episode celebrating love and connection. Stars Hollow style romance at its
+            finest.</p>
+        </div>
+      </div>
+      <div class="episode-card">
+        <div class="episode-thumb"><img src="WhatsApp Image 2026-03-09 at 18.14.45.jpeg" alt="Episode 4" /><span
+            class="episode-number">Episode 4</span><span class="episode-runtime">43m</span></div>
+        <div class="episode-info">
+          <h4 class="episode-title">She's Batman</h4>
+          <p class="episode-desc">The hero we all need. An action-packed episode with all the bravery and strength of
+            our
+            birthday girl.</p>
+        </div>
+      </div>
+    </div>
+  </section><!-- Similar Shows Section -->
+  <section class="similar-section">
+    <h2 class="section-title">More Like This</h2>
+    <div class="shows-row">
+      <div class="show-card">☕<br />Coffee<br /></div>
+      <div class="show-card">📚<br />Book<br />Club</div>
+      <div class="show-card">🍕<br />Pizza<br />Nights</div>
+      <div class="show-card">🎬<br />Movie<br />Marathon</div>
+      <div class="show-card">🍂<br />Autumn<br />Vibes</div>
+      <div class="show-card">🎂<br />Birthday<br />Special</div>
+    </div>
+  </section><!-- Footer -->
+  <footer class="netflix-footer">
+
+    <p>Happy 21st Birthday, Bear! 🐻🎂☕</p>
+    <p class="c2368">"I'm glad you didn't go to Yale..."<br />I love you sarn&lt;3</p>
+  </footer><!-- Audio Player (Hidden) --><audio id="birthdaySong" preload="auto">
+    <source src="TheLaThereSheGoes.mp3" type="audio/mpeg" />
+  </audio>
+  <div>
+  
+ 
+
+ 
+  </div>
+  <script>
+    let isPlaying = false;
+    const audio = new Audio();
+    audio.src = "TheLaThereSheGoes.mp3";
+    
+    function playSong() {
+        const indicator = document.getElementById('playingIndicator');
+        
+        if (!isPlaying) {
+            audio.play().then(() => {
+                isPlaying = true;
+                indicator.classList.add('show');
+                document.querySelector('.btn-play').innerHTML = '<span class="btn-icon">⏸</span>Pause';
+            }).catch(err => {
+                console.log('Audio play failed:', err);
+                alert('Click play to start the birthday song! 🎵');
+            });
+        } else {
+            audio.pause();
+            isPlaying = false;
+            indicator.classList.remove('show');
+            document.querySelector('.btn-play').innerHTML = '<span class="btn-icon">▶</span>Play';
+        }
+    }
+    
+    audio.addEventListener('ended', () => {
+        isPlaying = false;
+        document.getElementById('playingIndicator').classList.remove('show');
+        document.querySelector('.btn-play').innerHTML = '<span class="btn-icon">▶</span>Play';
+    });
+  </script>
+</body>
+</html>
